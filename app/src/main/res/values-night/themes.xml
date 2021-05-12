@@ -14,4 +14,10 @@
         <!-- Customize your theme here. -->
         <item name="backgroundColor">@color/background_color_night</item>
     </style>
+
+    <style name="TranslucentBar" parent="Theme.Boredom">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
 </resources>

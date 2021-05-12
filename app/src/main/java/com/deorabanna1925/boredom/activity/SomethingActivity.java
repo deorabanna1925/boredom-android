@@ -57,7 +57,7 @@ public class SomethingActivity extends AppCompatActivity {
         showDlg(this);
         String url = "https://www.boredapi.com/api/";
         url += "activity";
-        final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        final RequestQueue queue = Volley.newRequestQueue(this);
         queue.getCache().clear();
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
             hideDlg();
@@ -104,10 +104,9 @@ public class SomethingActivity extends AppCompatActivity {
                 dialog = new ProgressDialog(c);
                 dialog.setCancelable(false);
                 dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-            } else {
-                dialog.show();
             }
+            dialog.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
