@@ -13,9 +13,6 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Boredom">
         <activity
-            android:name=".activity.BhagavadGitaActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
             android:name=".activity.SomethingActivity"
             android:configChanges="orientation|screenSize" />
         <activity
