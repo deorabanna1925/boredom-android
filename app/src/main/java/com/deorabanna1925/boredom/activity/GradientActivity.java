@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GradientActivity extends AppCompatActivity {
 
@@ -33,6 +34,8 @@ public class GradientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gradient);
+
+        getSupportActionBar().hide();
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -71,7 +74,7 @@ public class GradientActivity extends AppCompatActivity {
                         allColors.add(value);
                     }
                     arrayList.add(new ModelGradient(name,allColors));
-
+                    Collections.shuffle(arrayList);
                     adapter = new GradientAdapter(GradientActivity.this,arrayList);
                     recyclerView.setAdapter(adapter);
                 }

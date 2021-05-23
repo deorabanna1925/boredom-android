@@ -10,6 +10,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
+        android:clipToPadding="false"
+        android:paddingTop="32dp"
+        android:paddingBottom="24dp"
         tools:listitem="@layout/item_gradient"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

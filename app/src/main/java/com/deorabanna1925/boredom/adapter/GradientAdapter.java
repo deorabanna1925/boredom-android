@@ -41,15 +41,13 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
         ModelGradient model = arrayList.get(position);
         holder.name.setText(model.getName());
 
-        int array[];
-        array = new int[model.getColors().size()];
-
+        int[] array = new int[model.getColors().size()];
         for (int i = 0; i < model.getColors().size(); i++) {
             array[i] = Color.parseColor(model.getColors().get(i).length() == 4 ? "#ffffff" : model.getColors().get(i));
         }
 
         GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.LEFT_RIGHT, array);
+                GradientDrawable.Orientation.RIGHT_LEFT, array);
         gd.setCornerRadius(0f);
         holder.name.setBackground(gd);
 
