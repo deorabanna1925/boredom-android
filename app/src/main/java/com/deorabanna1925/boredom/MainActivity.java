@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.deorabanna1925.boredom.activity.ColorsActivity;
+import com.deorabanna1925.boredom.activity.GradientActivity;
 import com.deorabanna1925.boredom.activity.SomethingActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void openColors(View view) {
         startActivity(new Intent(MainActivity.this, ColorsActivity.class));
+    }
+
+    public void openGradient(View view) {
+        startActivity(new Intent(MainActivity.this, GradientActivity.class));
     }
 
     public void openSomething(View view) {
