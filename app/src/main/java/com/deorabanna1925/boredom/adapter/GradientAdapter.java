@@ -43,7 +43,7 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
 
         int[] array = new int[model.getColors().size()];
         for (int i = 0; i < model.getColors().size(); i++) {
-            array[i] = Color.parseColor(model.getColors().get(i).length() == 4 ? "#ffffff" : model.getColors().get(i));
+            array[i] = Color.parseColor(model.getColors().get(i).length() < 7 ? "#ffffff" : model.getColors().get(i));
         }
 
         GradientDrawable gd = new GradientDrawable(
