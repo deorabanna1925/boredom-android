@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         new Handler().postDelayed((Runnable) () -> {
-            Intent mainIntent = new Intent(SplashActivity.this,MainActivity.class);
+            Intent mainIntent = new Intent(SplashActivity.this, DashboardActivity.class);
             SplashActivity.this.startActivity(mainIntent);
             SplashActivity.this.finish();
         }, SPLASH_DISPLAY_LENGTH);

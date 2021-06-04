@@ -24,7 +24,7 @@
             android:configChanges="orientation|screenSize"
             android:theme="@style/TranslucentBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".DashboardActivity"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".SplashActivity"

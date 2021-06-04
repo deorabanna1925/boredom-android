@@ -9,8 +9,6 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,40 +17,37 @@ import com.android.volley.toolbox.Volley;
 import com.deorabanna1925.boredom.activity.ColorsActivity;
 import com.deorabanna1925.boredom.activity.GradientActivity;
 import com.deorabanna1925.boredom.activity.SomethingActivity;
-import com.deorabanna1925.boredom.adapter.GradientAdapter;
-import com.deorabanna1925.boredom.model.ModelGradient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dashboard);
+
 
 
     }
 
     public void openColors(View view) {
-        startActivity(new Intent(MainActivity.this, ColorsActivity.class));
+        startActivity(new Intent(DashboardActivity.this, ColorsActivity.class));
     }
 
     public void openGradient(View view) {
-        startActivity(new Intent(MainActivity.this, GradientActivity.class));
+        startActivity(new Intent(DashboardActivity.this, GradientActivity.class));
     }
 
     public void openSomething(View view) {
-        startActivity(new Intent(MainActivity.this, SomethingActivity.class));
+        startActivity(new Intent(DashboardActivity.this, SomethingActivity.class));
     }
 
     public void getIssCoordiantes(View view) {
