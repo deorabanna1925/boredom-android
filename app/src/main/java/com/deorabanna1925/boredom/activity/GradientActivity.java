@@ -1,20 +1,16 @@
 package com.deorabanna1925.boredom.activity;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.deorabanna1925.boredom.R;
 import com.deorabanna1925.boredom.adapter.GradientAdapter;
+import com.deorabanna1925.boredom.databinding.ActivityGradientBinding;
 import com.deorabanna1925.boredom.model.ModelGradient;
 
 import org.json.JSONArray;
@@ -26,35 +22,28 @@ import java.util.Collections;
 
 public class GradientActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private ArrayList<ModelGradient> arrayList;
     private GradientAdapter adapter;
+
+    private ActivityGradientBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gradient);
+        binding = ActivityGradientBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         getSupportActionBar().hide();
 
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setNestedScrollingEnabled(false);
+        binding.recyclerView.setHasFixedSize(true);
 
         getGradientData();
 
     }
 
     private void getGradientData() {
-        /*
-            Data = 382
-            2 = 337
-            3 = 36
-            4 = 4
-            5 = 4
-            6 = 1
-         */
 
         arrayList = new ArrayList<>();
         String url = "https://raw.githubusercontent.com/ghosh/uiGradients/master/gradients.json";
@@ -76,7 +65,7 @@ public class GradientActivity extends AppCompatActivity {
                     arrayList.add(new ModelGradient(name,allColors));
                     Collections.shuffle(arrayList);
                     adapter = new GradientAdapter(GradientActivity.this,arrayList);
-                    recyclerView.setAdapter(adapter);
+                    binding.recyclerView.setAdapter(adapter);
                 }
 
             } catch (JSONException e) {
