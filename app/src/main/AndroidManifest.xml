@@ -12,8 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Boredom"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.AdviceSlipActivity"/>
-        <activity android:name=".activity.KanyeWestActivity"/>
+        <activity
+            android:name=".activity.AdviceSlipActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/TranslucentBar" />
+        <activity
+            android:name=".activity.KanyeWestActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/TranslucentBar" />
         <activity
             android:name=".activity.GradientActivity"
             android:configChanges="orientation|screenSize"
