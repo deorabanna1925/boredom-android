@@ -40,7 +40,6 @@ public class ExploreFragment extends Fragment {
         binding.recyclerView.setHasFixedSize(true);
 
         arrayList = new ArrayList<>();
-
         arrayList.add(new ModelExplore("Advice Slip", "Get Random Advice", AdviceSlipActivity.class));
         arrayList.add(new ModelExplore("Random Color", "Generate a Random Color", ColorsActivity.class));
         arrayList.add(new ModelExplore("Gradient Color", "Get List of Gradients", GradientActivity.class));
