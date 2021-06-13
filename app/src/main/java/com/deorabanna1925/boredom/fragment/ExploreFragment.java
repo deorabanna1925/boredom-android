@@ -38,7 +38,6 @@ public class ExploreFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setNestedScrollingEnabled(false);
         binding.recyclerView.setHasFixedSize(true);
-
         arrayList = new ArrayList<>();
         arrayList.add(new ModelExplore("Advice Slip", "Get Random Advice", AdviceSlipActivity.class));
         arrayList.add(new ModelExplore("Random Color", "Generate a Random Color", ColorsActivity.class));
