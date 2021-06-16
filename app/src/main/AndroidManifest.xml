@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Boredom"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".activity.AdviceSlipActivity"
             android:configChanges="orientation|screenSize"
