@@ -6,16 +6,14 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deorabanna1925.boredom.R;
 import com.deorabanna1925.boredom.model.ModelGradient;
-import com.deorabanna1925.boredom.model.ModelSomething;
 
 import java.util.ArrayList;
 
@@ -51,6 +49,7 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
         gd.setCornerRadius(0f);
         holder.name.setBackground(gd);
 
+
     }
 
     @Override
@@ -61,6 +60,7 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView name;
+        public LinearLayout codes;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

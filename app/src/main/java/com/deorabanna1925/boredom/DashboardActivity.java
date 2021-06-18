@@ -2,7 +2,6 @@ package com.deorabanna1925.boredom;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -19,9 +17,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.deorabanna1925.boredom.activity.ColorsActivity;
-import com.deorabanna1925.boredom.activity.GradientActivity;
-import com.deorabanna1925.boredom.activity.SomethingActivity;
 import com.deorabanna1925.boredom.databinding.ActivityDashboardBinding;
 import com.deorabanna1925.boredom.fragment.ExploreFragment;
 import com.deorabanna1925.boredom.fragment.HomeFragment;
@@ -89,18 +84,6 @@ public class DashboardActivity extends AppCompatActivity {
 
             return true;
         });
-    }
-
-    public void openColors(View view) {
-        startActivity(new Intent(DashboardActivity.this, ColorsActivity.class));
-    }
-
-    public void openGradient(View view) {
-        startActivity(new Intent(DashboardActivity.this, GradientActivity.class));
-    }
-
-    public void openSomething(View view) {
-        startActivity(new Intent(DashboardActivity.this, SomethingActivity.class));
     }
 
     public void getIssCoordiantes(View view) {

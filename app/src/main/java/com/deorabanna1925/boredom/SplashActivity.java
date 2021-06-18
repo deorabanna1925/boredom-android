@@ -1,14 +1,13 @@
 package com.deorabanna1925.boredom;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
-import com.deorabanna1925.boredom.databinding.ActivityDashboardBinding;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.deorabanna1925.boredom.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {
@@ -27,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.hide();
 
-        new Handler().postDelayed(() -> {
+        new Handler(getMainLooper()).postDelayed(() -> {
             Intent mainIntent = new Intent(SplashActivity.this, DashboardActivity.class);
             SplashActivity.this.startActivity(mainIntent);
             SplashActivity.this.finish();

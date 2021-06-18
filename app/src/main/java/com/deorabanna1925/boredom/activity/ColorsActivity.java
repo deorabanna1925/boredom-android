@@ -1,8 +1,12 @@
 package com.deorabanna1925.boredom.activity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -60,6 +64,13 @@ public class ColorsActivity extends AppCompatActivity {
                 String hexCode = "#" + hex;
 
                 binding.hexValue.setText(hexCode);
+
+                binding.hexValue.setOnClickListener(view -> {
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("hexCode",hexCode);
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(this, "Copy to Clipboard", Toast.LENGTH_SHORT).show();
+                });
 
                 binding.rValue.setText(String.valueOf(r));
                 binding.gValue.setText(String.valueOf(g));
