@@ -4,11 +4,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deorabanna1925.boredom.databinding.ItemGradientBinding;
@@ -48,8 +51,17 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
         gd.setCornerRadius(0f);
         holder.name.setBackground(gd);
 
-        holder.colors.setOnClickListener(view -> {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.name.getLayoutParams();
+        params.height = 400;
+        holder.name.setLayoutParams(params);
 
+        holder.recyclerView.setVisibility(View.GONE);
+        holder.colors.setOnClickListener(view -> {
+            if(holder.recyclerView.getVisibility()== View.GONE){
+                holder.recyclerView.setVisibility(View.VISIBLE);
+            }else{
+                holder.recyclerView.setVisibility(View.GONE);
+            }
         });
         holder.rotate45Left.setOnClickListener(view -> {
             switch (gd.getOrientation()) {
@@ -96,6 +108,7 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
                     gd.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
                     break;
                 case TOP_BOTTOM:
+                case TL_BR:
                     gd.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
                     break;
             }
@@ -133,8 +146,25 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
             holder.name.setBackground(gd);
         });
         holder.fullscreen.setOnClickListener(view -> {
-
+            if(params.height == 400){
+                params.height = 800;
+                holder.name.setLayoutParams(params);
+            }else {
+                params.height = 400;
+                holder.name.setLayoutParams(params);
+            }
         });
+
+        holder.recyclerView.setLayoutManager(
+                new LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+        );
+        holder.recyclerView.setNestedScrollingEnabled(false);
+        holder.recyclerView.setHasFixedSize(true);
+
+        holder.recyclerView.setAdapter(
+                new GradientColorAdapter(context,model.getColors())
+        );
+
 
 
     }
@@ -153,6 +183,8 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
         public ImageView rotate45Right;
         public ImageView fullscreen;
 
+        public RecyclerView recyclerView;
+
         public ViewHolder(@NonNull ItemGradientBinding binding) {
             super(binding.getRoot());
 
@@ -162,6 +194,7 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
             rotate90 = binding.rotate90;
             rotate45Right = binding.rotate45Right;
             fullscreen = binding.fullscreen;
+            recyclerView = binding.recyclerView;
 
         }
 
