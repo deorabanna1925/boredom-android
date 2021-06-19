@@ -4,15 +4,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.deorabanna1925.boredom.R;
+import com.deorabanna1925.boredom.databinding.ItemGradientBinding;
 import com.deorabanna1925.boredom.model.ModelGradient;
 
 import java.util.ArrayList;
@@ -30,8 +29,8 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
     @NonNull
     @Override
     public GradientAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gradient, parent, false);
-        return new ViewHolder(view);
+        ItemGradientBinding binding = ItemGradientBinding.inflate(LayoutInflater.from(context), parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
@@ -45,9 +44,97 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
         }
 
         GradientDrawable gd = new GradientDrawable(
-                GradientDrawable.Orientation.RIGHT_LEFT, array);
+                GradientDrawable.Orientation.LEFT_RIGHT, array);
         gd.setCornerRadius(0f);
         holder.name.setBackground(gd);
+
+        holder.colors.setOnClickListener(view -> {
+
+        });
+        holder.rotate45Left.setOnClickListener(view -> {
+            switch (gd.getOrientation()) {
+                case LEFT_RIGHT:
+                    gd.setOrientation(GradientDrawable.Orientation.BL_TR);
+                    break;
+                case BL_TR:
+                    gd.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+                    break;
+                case BOTTOM_TOP:
+                    gd.setOrientation(GradientDrawable.Orientation.BR_TL);
+                    break;
+                case BR_TL:
+                    gd.setOrientation(GradientDrawable.Orientation.RIGHT_LEFT);
+                    break;
+                case RIGHT_LEFT:
+                    gd.setOrientation(GradientDrawable.Orientation.TR_BL);
+                    break;
+                case TR_BL:
+                    gd.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+                    break;
+                case TOP_BOTTOM:
+                    gd.setOrientation(GradientDrawable.Orientation.TL_BR);
+                    break;
+                case TL_BR:
+                    gd.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+                    break;
+            }
+            gd.setCornerRadius(0f);
+            holder.name.setBackground(gd);
+        });
+        holder.rotate90.setOnClickListener(view -> {
+            switch (gd.getOrientation()) {
+                case LEFT_RIGHT:
+                case BL_TR:
+                    gd.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+                    break;
+                case BOTTOM_TOP:
+                case BR_TL:
+                    gd.setOrientation(GradientDrawable.Orientation.RIGHT_LEFT);
+                    break;
+                case RIGHT_LEFT:
+                case TR_BL:
+                    gd.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+                    break;
+                case TOP_BOTTOM:
+                    gd.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+                    break;
+            }
+            gd.setCornerRadius(0f);
+            holder.name.setBackground(gd);
+        });
+        holder.rotate45Right.setOnClickListener(view -> {
+            switch (gd.getOrientation()) {
+                case LEFT_RIGHT:
+                    gd.setOrientation(GradientDrawable.Orientation.TL_BR);
+                    break;
+                case TL_BR:
+                    gd.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+                    break;
+                case TOP_BOTTOM:
+                    gd.setOrientation(GradientDrawable.Orientation.TR_BL);
+                    break;
+                case TR_BL:
+                    gd.setOrientation(GradientDrawable.Orientation.RIGHT_LEFT);
+                    break;
+                case RIGHT_LEFT:
+                    gd.setOrientation(GradientDrawable.Orientation.BR_TL);
+                    break;
+                case BR_TL:
+                    gd.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+                    break;
+                case BOTTOM_TOP:
+                    gd.setOrientation(GradientDrawable.Orientation.BL_TR);
+                    break;
+                case BL_TR:
+                    gd.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+                    break;
+            }
+            gd.setCornerRadius(0f);
+            holder.name.setBackground(gd);
+        });
+        holder.fullscreen.setOnClickListener(view -> {
+
+        });
 
 
     }
@@ -60,12 +147,21 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView name;
-        public LinearLayout codes;
+        public ImageView colors;
+        public ImageView rotate45Left;
+        public ImageView rotate90;
+        public ImageView rotate45Right;
+        public ImageView fullscreen;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public ViewHolder(@NonNull ItemGradientBinding binding) {
+            super(binding.getRoot());
 
-            name = itemView.findViewById(R.id.item_gradient_color_name);
+            name = binding.name;
+            colors = binding.colors;
+            rotate45Left = binding.rotate45Left;
+            rotate90 = binding.rotate90;
+            rotate45Right = binding.rotate45Right;
+            fullscreen = binding.fullscreen;
 
         }
 
