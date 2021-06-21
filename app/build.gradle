@@ -45,4 +45,7 @@ dependencies {
 
     //Networking
     implementation 'com.android.volley:volley:1.2.0'
+
+    //Map
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 }

@@ -40,10 +40,8 @@ public class SomethingActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 if (jsonObject.has("error")) {
-
                     String error = jsonObject.getString("error");
-                    Toast.makeText(this, "" + error.toString(), Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show();
                 } else {
 
                     String activity = jsonObject.getString("activity");
