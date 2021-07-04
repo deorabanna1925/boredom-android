@@ -3,7 +3,6 @@ package com.deorabanna1925.boredom.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.deorabanna1925.boredom.R;
+import com.deorabanna1925.boredom.databinding.ItemMainExploreBinding;
 import com.deorabanna1925.boredom.model.ModelExplore;
 
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
     @NonNull
     @Override
     public ExploreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_explore, parent, false);
-        return new ViewHolder(view);
+        ItemMainExploreBinding binding = ItemMainExploreBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new ViewHolder(binding);
     }
 
     @Override
@@ -56,12 +55,12 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
         public TextView subTitle;
         public ImageView open;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public ViewHolder(@NonNull ItemMainExploreBinding binding) {
+            super(binding.getRoot());
 
-            title = itemView.findViewById(R.id.title);
-            subTitle = itemView.findViewById(R.id.sub_title);
-            open = itemView.findViewById(R.id.open);
+            title = binding.title;
+            subTitle = binding.subTitle;
+            open = binding.open;
 
         }
 
