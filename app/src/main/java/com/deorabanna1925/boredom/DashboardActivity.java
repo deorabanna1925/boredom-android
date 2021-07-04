@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,7 +52,21 @@ public class DashboardActivity extends AppCompatActivity {
     private void setupDefaultHomeScreen() {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         binding.bottomNavigation.setSelectedItemId(R.id.bottom_nav_home);
-        actionBar.setTitle("Home");
+        actionBar.setTitle(getHomeTitle());
+    }
+
+    private String getHomeTitle() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        if(timeOfDay < 12){
+            return "Good Morning";
+        }else if(timeOfDay < 16){
+            return "Good Afternoon";
+        }else if(timeOfDay < 21){
+            return "Good Evening";
+        }else {
+            return "Good Night";
+        }
     }
 
     private void setupActionBar() {
@@ -67,7 +82,7 @@ public class DashboardActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.bottom_nav_home:
                     selectedFragment = new HomeFragment();
-                    actionBar.setTitle("Home");
+                    actionBar.setTitle(getHomeTitle());
                     break;
                 case R.id.bottom_nav_explore:
                     selectedFragment = new ExploreFragment();

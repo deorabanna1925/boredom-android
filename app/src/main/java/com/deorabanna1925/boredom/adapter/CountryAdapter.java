@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.deorabanna1925.boredom.databinding.ItemCountryBinding;
+import com.deorabanna1925.boredom.model.Currencies;
 import com.deorabanna1925.boredom.model.ModelCountry;
 
 import java.time.OffsetDateTime;
@@ -86,6 +87,25 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             utc += "\n";
         }
 
+        String symbol = "";
+        for(Currencies currency : model.getCurrencies()) {
+            symbol += currency.getSymbol();
+            holder.currencySymbol.setText(symbol);
+            symbol += "\n";
+        }
+        String name = "";
+        for(Currencies currency : model.getCurrencies()) {
+            name += currency.getName();
+            holder.currencyName.setText(name);
+            name += "\n";
+        }
+        String code = "";
+        for(Currencies currency : model.getCurrencies()) {
+            code += currency.getCode();
+            holder.currencyCode.setText(code);
+            code += "\n";
+        }
+
         holder.searchGoogle.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
             intent.putExtra(SearchManager.QUERY, model.getName()); // query contains search string
@@ -147,6 +167,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public TextView population;
         public TextView searchGoogle;
         public TextView viewOnMap;
+        public TextView currencyCode;
+        public TextView currencyName;
+        public TextView currencySymbol;
 
         public ViewHolder(@NonNull ItemCountryBinding binding) {
             super(binding.getRoot());
@@ -164,6 +187,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             population = binding.population;
             searchGoogle = binding.searchGoogle;
             viewOnMap = binding.viewOnMap;
+            currencyCode = binding.currencyCode;
+            currencyName = binding.currencyName;
+            currencySymbol = binding.currencySymbol;
         }
 
     }
