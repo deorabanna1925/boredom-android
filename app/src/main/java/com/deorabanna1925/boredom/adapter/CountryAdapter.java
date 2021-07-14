@@ -23,6 +23,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
 
     private final Context context;
@@ -62,11 +66,13 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
 //                .apply(new RequestOptions().centerCrop())
 //                .into(holder.flag);
 
-        String flat = "https://www.countryflags.io/" + model.getAlpha2Code() + "/flat/64.png";
-        String shiny = "https://www.countryflags.io/" + model.getAlpha2Code() + "/shiny/64.png";
+        String flag = "https://flagcdn.com/w640/" + model.getAlpha2Code().toLowerCase() + ".webp";
 
-        Glide.with(context).load(flat).into(holder.flag);
-
+        Glide.with(context).load(flag).into(holder.flag);
+        holder.flagBack.setAlpha(0.2f);
+        Glide.with(context).load(flag)
+                .apply(bitmapTransform(new BlurTransformation(22)))
+                .into(holder.flagBack);
 
         String area = model.getArea() + " km" + "\u00B2";
         holder.area.setText(area);
@@ -158,6 +164,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public TextView name;
         public TextView capital;
         public ImageView flag;
+        public ImageView flagBack;
         public TextView alpha2Code;
         public TextView alpha3Code;
         public TextView topLevelDomain;
@@ -178,6 +185,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             name = binding.name;
             capital = binding.capital;
             flag = binding.flag;
+            flagBack = binding.flagBack;
             alpha2Code = binding.alpha2Code;
             alpha3Code = binding.alpha3Code;
             topLevelDomain = binding.topLevelDomain;
