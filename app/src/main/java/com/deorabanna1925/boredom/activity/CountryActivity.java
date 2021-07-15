@@ -58,7 +58,9 @@ public class CountryActivity extends AppCompatActivity {
                 binding.viewpager.setAdapter(adapter);
                 binding.viewpager.setOffscreenPageLimit(1);
                 new TabLayoutMediator(binding.tabs, binding.viewpager,
-                        (tab, position) -> tab.setText(arrayList.get(position).getName())
+                        (tab, position) -> {
+                            tab.setText(arrayList.get(position).getName());
+                        }
                 ).attach();
 
             } catch (JSONException e) {

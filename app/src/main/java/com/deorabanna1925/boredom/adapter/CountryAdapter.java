@@ -112,6 +112,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             code += "\n";
         }
 
+        holder.subRegion.setText(model.getSubregion());
+        holder.region.setText(model.getRegion());
+
         holder.searchGoogle.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
             intent.putExtra(SearchManager.QUERY, model.getName()); // query contains search string
@@ -171,6 +174,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public TextView timezones;
         public TextView utc;
         public TextView area;
+        public TextView subRegion;
+        public TextView region;
         public TextView population;
         public TextView searchGoogle;
         public TextView viewOnMap;
@@ -193,6 +198,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             utc = binding.utc;
             area = binding.area;
             population = binding.population;
+            subRegion = binding.subRegion;
+            region = binding.region;
             searchGoogle = binding.searchGoogle;
             viewOnMap = binding.viewOnMap;
             currencyCode = binding.currencyCode;
