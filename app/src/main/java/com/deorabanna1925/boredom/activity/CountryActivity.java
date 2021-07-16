@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class CountryActivity extends AppCompatActivity {
 
     private ActivityCountryBinding binding;
-
     private ArrayList<ModelCountry> arrayList;
     private CountryAdapter adapter;
 
