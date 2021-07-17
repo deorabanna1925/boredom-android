@@ -34,7 +34,6 @@ public class CountryActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         getSupportActionBar().hide();
-
         getCountryData();
 
     }
