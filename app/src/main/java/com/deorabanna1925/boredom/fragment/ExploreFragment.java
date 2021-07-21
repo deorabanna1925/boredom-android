@@ -12,6 +12,7 @@ import com.deorabanna1925.boredom.activity.AdviceSlipActivity;
 import com.deorabanna1925.boredom.activity.ColorsActivity;
 import com.deorabanna1925.boredom.activity.CountryActivity;
 import com.deorabanna1925.boredom.activity.GradientActivity;
+import com.deorabanna1925.boredom.activity.IssLocationActivity;
 import com.deorabanna1925.boredom.activity.KanyeWestActivity;
 import com.deorabanna1925.boredom.activity.SomethingActivity;
 import com.deorabanna1925.boredom.adapter.ExploreAdapter;
@@ -45,7 +46,8 @@ public class ExploreFragment extends Fragment {
         arrayList.add(new ModelExplore("Gradient Color", "Get List of Gradients", GradientActivity.class));
         arrayList.add(new ModelExplore("Country Activity", "Know about different countries", CountryActivity.class));
         arrayList.add(new ModelExplore("Random Activity", "Bored try something new", SomethingActivity.class));
-        arrayList.add(new ModelExplore("Kanye West Quote ", "Get Kanye West Random Quote", KanyeWestActivity.class));
+        arrayList.add(new ModelExplore("Kanye West Quote", "Get Kanye West Random Quote", KanyeWestActivity.class));
+        arrayList.add(new ModelExplore("ISS Location Activity", "Get current location of International Space Station", IssLocationActivity.class));
 
         adapter = new ExploreAdapter(getActivity(),arrayList);
         binding.recyclerView.setAdapter(adapter);
