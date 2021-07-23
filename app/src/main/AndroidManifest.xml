@@ -14,8 +14,12 @@
         android:theme="@style/Theme.Boredom"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".activity.TextSpeechActivity"></activity>
-        <activity android:name=".activity.IssLocationActivity" />
+        <activity
+            android:name=".activity.TextSpeechActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activity.IssLocationActivity"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".activity.CountryActivity"
             android:configChanges="orientation|screenSize" />

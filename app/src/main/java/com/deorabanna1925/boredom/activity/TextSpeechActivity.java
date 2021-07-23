@@ -16,8 +16,8 @@ public class TextSpeechActivity extends AppCompatActivity {
         binding = ActivityTextSpeechBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Convert Text to Speech
+        //Convert Speech to Text
 
     }
-
-
 }
