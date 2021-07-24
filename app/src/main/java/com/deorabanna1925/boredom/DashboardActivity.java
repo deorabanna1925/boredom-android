@@ -55,6 +55,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setupActionBar() {
         actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle(getHomeTitle());
     }
 
     @SuppressLint("NonConstantResourceId")
