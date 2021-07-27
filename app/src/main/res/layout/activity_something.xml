@@ -157,32 +157,6 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="Key"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="4dp" />
-
-            <TextView
-                android:id="@+id/tv_something_key"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:textSize="18sp"
-                tools:text="key" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="8dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 android:text="Accessibility"
                 android:textSize="22sp"
                 android:textStyle="bold" />

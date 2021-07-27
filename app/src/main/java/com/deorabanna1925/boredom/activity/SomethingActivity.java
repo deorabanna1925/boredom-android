@@ -49,7 +49,6 @@ public class SomethingActivity extends AppCompatActivity {
                     int participants = jsonObject.getInt("participants");
                     double price = jsonObject.getDouble("price");
                     String link = jsonObject.getString("link");
-                    long key = jsonObject.getLong("key");
                     double accessibility = jsonObject.getDouble("accessibility");
 
                     binding.tvSomethingActivity.setText(activity);
@@ -57,7 +56,6 @@ public class SomethingActivity extends AppCompatActivity {
                     binding.tvSomethingParticipants.setText(String.valueOf(participants));
                     binding.tvSomethingPrice.setText(String.valueOf(price));
                     binding.tvSomethingLink.setText(link);
-                    binding.tvSomethingKey.setText(String.valueOf(key));
                     binding.tvSomethingAccessibility.setText(String.valueOf(accessibility));
                 }
 
