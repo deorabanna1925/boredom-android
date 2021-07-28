@@ -41,13 +41,13 @@ public class ExploreFragment extends Fragment {
         binding.recyclerView.setNestedScrollingEnabled(false);
         binding.recyclerView.setHasFixedSize(true);
         arrayList = new ArrayList<>();
-        arrayList.add(new ModelExplore("Advice Slip", "Get Random Advice", AdviceSlipActivity.class));
-        arrayList.add(new ModelExplore("Random Color", "Generate a Random Color", ColorsActivity.class));
-        arrayList.add(new ModelExplore("Gradient Color", "Get List of Gradients", GradientActivity.class));
+        arrayList.add(new ModelExplore("Advice Slip", "Get random advice", AdviceSlipActivity.class));
+        arrayList.add(new ModelExplore("Random Color", "Generate a random color", ColorsActivity.class));
+        arrayList.add(new ModelExplore("Gradient Color", "Get list of gradients", GradientActivity.class));
         arrayList.add(new ModelExplore("Country Activity", "Know about different countries", CountryActivity.class));
         arrayList.add(new ModelExplore("Random Activity", "Bored try something new", SomethingActivity.class));
-        arrayList.add(new ModelExplore("Kanye West Quote", "Get Kanye West Random Quote", KanyeWestActivity.class));
-        arrayList.add(new ModelExplore("ISS Location Activity", "Get current location of International Space Station", IssLocationActivity.class));
+        arrayList.add(new ModelExplore("Kanye West Quote", "Get kanye west random quote", KanyeWestActivity.class));
+        arrayList.add(new ModelExplore("ISS Location Activity", "Get current location of international space station", IssLocationActivity.class));
 
         adapter = new ExploreAdapter(getActivity(),arrayList);
         binding.recyclerView.setAdapter(adapter);
