@@ -147,7 +147,7 @@ public class GradientAdapter extends RecyclerView.Adapter<GradientAdapter.ViewHo
         });
         holder.fullscreen.setOnClickListener(view -> {
             if(params.height == 400){
-                params.height = 800;
+                params.height = 1200;
                 holder.name.setLayoutParams(params);
             }else {
                 params.height = 400;
