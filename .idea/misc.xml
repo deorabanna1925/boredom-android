@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/boredom/app/src/main/res/layout/activity_colors.xml" value="0.20185185185185187" />
+        <entry key="..\:/Projects/boredom/app/src/main/res/layout/activity_country.xml" value="0.20185185185185187" />
         <entry key="..\:/Projects/boredom/app/src/main/res/layout/activity_text_speech.xml" value="0.18796296296296297" />
+        <entry key="..\:/Projects/boredom/app/src/main/res/layout/item_college.xml" value="0.21145833333333333" />
+        <entry key="..\:/Projects/boredom/app/src/main/res/layout/item_country.xml" value="0.20185185185185187" />
       </map>
     </option>
   </component>

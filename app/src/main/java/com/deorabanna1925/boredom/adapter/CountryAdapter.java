@@ -10,22 +10,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.deorabanna1925.boredom.databinding.ItemCountryBinding;
 import com.deorabanna1925.boredom.model.Currencies;
+import com.deorabanna1925.boredom.model.ModelCollege;
 import com.deorabanna1925.boredom.model.ModelCountry;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.lang.reflect.Type;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import jp.wasabeef.glide.transformations.BlurTransformation;
-
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
 
@@ -55,24 +63,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         holder.alpha3Code.setText(model.getAlpha3Code());
         holder.topLevelDomain.setText(model.getTopLevelDomain().get(0));
 
-//        RequestBuilder<PictureDrawable> requestBuilder = GlideToVectorYou
-//                .init()
-//                .with(context)
-//                .getRequestBuilder();
-//
-//        requestBuilder
-//                .load(Uri.parse(model.getFlag()))
-//                .transition(DrawableTransitionOptions.withCrossFade())
-//                .apply(new RequestOptions().centerCrop())
-//                .into(holder.flag);
-
         String flag = "https://flagcdn.com/w640/" + model.getAlpha2Code().toLowerCase() + ".webp";
 
         Glide.with(context).load(flag).into(holder.flag);
-        holder.flagBack.setAlpha(0.2f);
-        Glide.with(context).load(flag)
-                .apply(bitmapTransform(new BlurTransformation(22)))
-                .into(holder.flagBack);
 
         String area = model.getArea() + " km" + "\u00B2";
         holder.area.setText(area);
@@ -131,6 +124,38 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             context.startActivity(intent);
         });
 
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        holder.recyclerView.setNestedScrollingEnabled(false);
+        holder.recyclerView.setHasFixedSize(true);
+
+        getColleges(holder,model);
+
+    }
+
+    private void getColleges(ViewHolder holder, ModelCountry model) {
+        String url = "http://universities.hipolabs.com/search?country=" + model.getName();
+        final RequestQueue queue = Volley.newRequestQueue(context);
+        queue.getCache().clear();
+        StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
+            try {
+                JSONArray jsonArray = new JSONArray(response);
+                Gson gson = new Gson();
+                String jsonOutput = jsonArray.toString();
+                Type listType = new TypeToken<ArrayList<ModelCollege>>() {
+                }.getType();
+                ArrayList<ModelCollege> arrayList = gson.fromJson(jsonOutput, listType);
+                if(arrayList.size()!=0){
+                    String collegesInCountry = "Colleges in " + model.getName();
+                    holder.collegesInCountry.setText(collegesInCountry);
+                }
+                holder.recyclerView.setAdapter(new CollegeAdapter(context, arrayList));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+//            progressBar.setVisibility(View.GONE);
+        });
+        queue.add(request);
     }
 
     private String getTimezoneFromUTC(String timezone) {
@@ -146,14 +171,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         return extract;
     }
 
-//    private String getShortCalculation(long count) {
-//        if (count < 1000) return "" + count;
-//        int exp = (int) (Math.log(count) / Math.log(1000));
-//        return String.format(Locale.ENGLISH,"%.1f %c",
-//                count / Math.pow(1000, exp),
-//                "kMGTPE".charAt(exp-1));
-//    }
-
 
     @Override
     public int getItemCount() {
@@ -167,7 +184,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public TextView name;
         public TextView capital;
         public ImageView flag;
-        public ImageView flagBack;
         public TextView alpha2Code;
         public TextView alpha3Code;
         public TextView topLevelDomain;
@@ -182,6 +198,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public TextView currencyCode;
         public TextView currencyName;
         public TextView currencySymbol;
+        public TextView collegesInCountry;
+        public RecyclerView recyclerView;
 
         public ViewHolder(@NonNull ItemCountryBinding binding) {
             super(binding.getRoot());
@@ -190,7 +208,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             name = binding.name;
             capital = binding.capital;
             flag = binding.flag;
-            flagBack = binding.flagBack;
             alpha2Code = binding.alpha2Code;
             alpha3Code = binding.alpha3Code;
             topLevelDomain = binding.topLevelDomain;
@@ -205,6 +222,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             currencyCode = binding.currencyCode;
             currencyName = binding.currencyName;
             currencySymbol = binding.currencySymbol;
+            collegesInCountry = binding.collegesInCountry;
+            recyclerView = binding.recyclerView;
         }
 
     }

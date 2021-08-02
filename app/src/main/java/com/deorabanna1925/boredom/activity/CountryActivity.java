@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class CountryActivity extends AppCompatActivity {
 
     private ActivityCountryBinding binding;
-    private ArrayList<ModelCountry> arrayList;
     private CountryAdapter adapter;
 
     @Override
@@ -39,7 +38,6 @@ public class CountryActivity extends AppCompatActivity {
     }
 
     private void getCountryData() {
-        arrayList = new ArrayList<>();
         String url = "https://restcountries.eu/rest/v2/";
         final RequestQueue queue = Volley.newRequestQueue(this);
         queue.getCache().clear();
