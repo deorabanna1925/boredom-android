@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.deorabanna1925.boredom">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,6 +14,12 @@
         android:theme="@style/Theme.Boredom"
         android:fullBackupContent="false"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/FinestWebViewTheme.Light"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".activity.TextSpeechActivity"
             android:configChanges="orientation|screenSize" />

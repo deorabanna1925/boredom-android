@@ -62,4 +62,7 @@ dependencies {
     //Lottie
     implementation 'com.airbnb.android:lottie:3.7.1'
 
+    //Web View
+    implementation 'com.thefinestartist:finestwebview:1.2.7'
+
 }

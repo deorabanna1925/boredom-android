@@ -38,12 +38,11 @@ public class IssLocationActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Current ISS Location");
 
-        getIssCoordiantes();
-
+        getIssCoordinates();
 
     }
 
-    public void getIssCoordiantes() {
+    public void getIssCoordinates() {
         String url = "http://api.open-notify.org/iss-now.json";
         final RequestQueue queue = Volley.newRequestQueue(this);
         queue.getCache().clear();

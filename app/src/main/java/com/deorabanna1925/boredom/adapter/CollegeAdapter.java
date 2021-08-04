@@ -3,6 +3,7 @@ package com.deorabanna1925.boredom.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.deorabanna1925.boredom.databinding.ItemCollegeBinding;
 import com.deorabanna1925.boredom.model.ModelCollege;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.ArrayList;
 
@@ -34,8 +36,13 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
     public void onBindViewHolder(@NonNull CollegeAdapter.ViewHolder holder, int position) {
         ModelCollege model = arrayList.get(position);
 
+        holder.count.setText(String.valueOf(position + 1));
         holder.name.setText(model.getName());
         holder.domain.setText(model.getDomains().get(0));
+
+        holder.visit.setOnClickListener(view -> {
+            new FinestWebView.Builder(context).show(model.getWeb_pages().get(0));
+        });
 
     }
 
@@ -49,12 +56,18 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
 
         public TextView name;
         public TextView domain;
+        public TextView count;
+        public ImageView visit;
 
         public ViewHolder(@NonNull ItemCollegeBinding binding) {
             super(binding.getRoot());
 
             name = binding.name;
             domain = binding.domain;
+            count = binding.count;
+            visit = binding.visit;
+
+
         }
 
     }

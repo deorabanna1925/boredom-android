@@ -12,13 +12,39 @@
     app:cardElevation="4dp">
 
     <LinearLayout
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <RelativeLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                app:cardBackgroundColor="?attr/colorOnPrimary"
+                app:cardCornerRadius="500dp"
+                app:cardElevation="0dp" />
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="1" />
+
+        </RelativeLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="start"
             android:orientation="vertical"
             android:padding="4dp">
@@ -63,6 +89,28 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                app:cardBackgroundColor="?attr/colorOnPrimary"
+                app:cardCornerRadius="500dp"
+                app:cardElevation="0dp" />
+
+            <ImageView
+                android:id="@+id/visit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_baseline_open_in_new_24" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
