@@ -17,11 +17,6 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <EditText
                 android:id="@+id/text"
                 android:layout_width="match_parent"
@@ -31,8 +26,6 @@
                 android:hint="Enter Text Here..."
                 android:padding="8dp"
                 android:textSize="24sp"/>
-
-        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
