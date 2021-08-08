@@ -15,6 +15,7 @@ import com.deorabanna1925.boredom.activity.GradientActivity;
 import com.deorabanna1925.boredom.activity.IssLocationActivity;
 import com.deorabanna1925.boredom.activity.KanyeWestActivity;
 import com.deorabanna1925.boredom.activity.SomethingActivity;
+import com.deorabanna1925.boredom.activity.SpeechTextActivity;
 import com.deorabanna1925.boredom.activity.TextSpeechActivity;
 import com.deorabanna1925.boredom.adapter.ExploreAdapter;
 import com.deorabanna1925.boredom.databinding.FragmentExploreBinding;
@@ -48,6 +49,7 @@ public class ExploreFragment extends Fragment {
         arrayList.add(new ModelExplore("Country Activity", "Know about different countries", CountryActivity.class));
         arrayList.add(new ModelExplore("Random Activity", "Bored try something new", SomethingActivity.class));
         arrayList.add(new ModelExplore("Text to Speech", "Convert Text to Speech", TextSpeechActivity.class));
+        arrayList.add(new ModelExplore("Speech to Text", "Convert Speech to Text", SpeechTextActivity.class));
         arrayList.add(new ModelExplore("Kanye West Quote", "Get kanye west random quote", KanyeWestActivity.class));
         arrayList.add(new ModelExplore("ISS Location Activity", "Get current location of international space station", IssLocationActivity.class));
 
