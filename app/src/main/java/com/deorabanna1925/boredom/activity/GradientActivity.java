@@ -1,6 +1,7 @@
 package com.deorabanna1925.boredom.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,7 +53,7 @@ public class GradientActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
             try {
                 JSONArray jsonArray = new JSONArray(response);
-
+                binding.progressBar.setVisibility(View.GONE);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String name = jsonObject.getString("name");
@@ -72,7 +73,7 @@ public class GradientActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }, error -> {
-//            progressBar.setVisibility(View.GONE);
+            binding.progressBar.setVisibility(View.GONE);
         });
         queue.add(request);
     }

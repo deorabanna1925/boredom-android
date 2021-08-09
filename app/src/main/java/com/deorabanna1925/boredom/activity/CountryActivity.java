@@ -1,6 +1,7 @@
 package com.deorabanna1925.boredom.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,7 +45,7 @@ public class CountryActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
             try {
                 JSONArray jsonArray = new JSONArray(response);
-
+                binding.progressBar.setVisibility(View.GONE);
                 Gson gson = new Gson();
                 String jsonOutput = jsonArray.toString();
                 Type listType = new TypeToken<ArrayList<ModelCountry>>() {
@@ -63,7 +64,7 @@ public class CountryActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }, error -> {
-//            progressBar.setVisibility(View.GONE);
+            binding.progressBar.setVisibility(View.GONE);
         });
         queue.add(request);
     }
