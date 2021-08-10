@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.deorabanna1925.boredom.databinding.ActivityColorsBinding;
 
 import org.json.JSONArray;
@@ -67,7 +68,7 @@ public class ColorsActivity extends AppCompatActivity {
 
                 binding.hexValue.setOnClickListener(view -> {
                     ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("hexCode",hexCode);
+                    ClipData clip = ClipData.newPlainText("hexCode", hexCode);
                     clipboard.setPrimaryClip(clip);
                     Toast.makeText(this, "Copy to Clipboard", Toast.LENGTH_SHORT).show();
                 });
@@ -81,8 +82,29 @@ public class ColorsActivity extends AppCompatActivity {
                 binding.vValue.setText(String.valueOf(v));
 
                 binding.colorImage.setColorFilter(Color.parseColor(hexCode));
-                binding.colorImageBackground.setColorFilter(Color.parseColor(hexCode));
+//                binding.colorBackground.setColorFilter(Color.parseColor(hexCode));
+                getImageData(hex);
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+            binding.progressBar.setVisibility(View.GONE);
+        });
+        queue.add(request);
+    }
+
+    private void getImageData(String hex) {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        String url = "https://php-noise.com/noise.php?hex=" + hex + "&json";
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        queue.getCache().clear();
+        StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
+            binding.progressBar.setVisibility(View.GONE);
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                String uri = jsonObject.getString("uri");
+                Glide.with(this).load(uri).into(binding.imageBackground);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

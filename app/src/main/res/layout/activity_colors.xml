@@ -12,7 +12,13 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/color_image_background"
+            android:id="@+id/image_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/color_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/color_radial_gradient" />
