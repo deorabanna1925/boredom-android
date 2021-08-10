@@ -45,7 +45,6 @@ public class ColorsActivity extends AppCompatActivity {
         final RequestQueue queue = Volley.newRequestQueue(this);
         queue.getCache().clear();
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
-            binding.progressBar.setVisibility(View.GONE);
             try {
                 JSONArray jsonArray = new JSONArray(response);
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
@@ -81,8 +80,6 @@ public class ColorsActivity extends AppCompatActivity {
                 binding.sValue.setText(String.valueOf(s));
                 binding.vValue.setText(String.valueOf(v));
 
-                binding.colorImage.setColorFilter(Color.parseColor(hexCode));
-//                binding.colorBackground.setColorFilter(Color.parseColor(hexCode));
                 getImageData(hex);
 
             } catch (JSONException e) {
@@ -95,7 +92,6 @@ public class ColorsActivity extends AppCompatActivity {
     }
 
     private void getImageData(String hex) {
-        binding.progressBar.setVisibility(View.VISIBLE);
         String url = "https://php-noise.com/noise.php?hex=" + hex + "&json";
         final RequestQueue queue = Volley.newRequestQueue(this);
         queue.getCache().clear();
@@ -105,6 +101,8 @@ public class ColorsActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(response);
                 String uri = jsonObject.getString("uri");
                 Glide.with(this).load(uri).into(binding.imageBackground);
+                String hexCode = "#" + hex;
+                binding.colorImage.setColorFilter(Color.parseColor(hexCode));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
