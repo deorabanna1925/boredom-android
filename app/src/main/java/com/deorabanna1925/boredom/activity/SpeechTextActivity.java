@@ -28,6 +28,8 @@ public class SpeechTextActivity extends AppCompatActivity {
         binding = ActivitySpeechTextBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        getSupportActionBar().setTitle("Speech to Text");
+
         binding.mic.setOnClickListener(view -> {
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},100);

@@ -23,6 +23,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:gravity="top"
+                android:imeOptions="flagNoExtractUi"
                 android:hint="Enter Text Here..."
                 android:padding="8dp"
                 android:textSize="24sp"/>

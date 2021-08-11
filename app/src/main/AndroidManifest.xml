@@ -17,10 +17,11 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activity.ThisPersonDoesNotExistActivity"
-            android:exported="true" />
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/TranslucentBar" />
         <activity
             android:name=".activity.SpeechTextActivity"
-            android:exported="true" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
