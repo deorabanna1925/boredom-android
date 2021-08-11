@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Boredom"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.ThisPersonDoesNotExistActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.SpeechTextActivity"
             android:exported="true" />
         <activity
