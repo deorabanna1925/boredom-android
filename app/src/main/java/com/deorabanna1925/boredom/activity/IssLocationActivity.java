@@ -70,13 +70,17 @@ public class IssLocationActivity extends AppCompatActivity {
 
                             View parentLayout = findViewById(android.R.id.content);
                             Snackbar.make(parentLayout, "International Space Station is above\n" + cityName, Snackbar.LENGTH_LONG)
-                                    .setAction("Open Map", v -> {
-                                        String uri = String.format(Locale.ENGLISH,
-                                                "http://maps.google.com/maps?q=loc:%f,%f",
-                                                Double.parseDouble(latitude),
-                                                Double.parseDouble(longitude)
-                                        );
-                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                    .setAction("Open", v -> {
+//                                        String uri = String.format(Locale.ENGLISH,
+//                                                "http://maps.google.com/maps?q=loc:%f,%f",
+//                                                Double.parseDouble(latitude),
+//                                                Double.parseDouble(longitude)
+//                                        );
+//                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                                        startActivity(intent);
+                                        Intent intent = new Intent(IssLocationActivity.this,MapViewActivity.class);
+                                        intent.putExtra("latitude",latitude);
+                                        intent.putExtra("longitude",longitude);
                                         startActivity(intent);
                                     })
                                     .setActionTextColor(Color.parseColor("#0099ff"))
@@ -85,13 +89,17 @@ public class IssLocationActivity extends AppCompatActivity {
                         } else {
                             View parentLayout = findViewById(android.R.id.content);
                             Snackbar.make(parentLayout, "International Space Station is above\nLocation Unknown", Snackbar.LENGTH_LONG)
-                                    .setAction("Open Map", v -> {
-                                        String uri = String.format(Locale.ENGLISH,
-                                                "http://maps.google.com/maps?q=loc:%f,%f",
-                                                Double.parseDouble(latitude),
-                                                Double.parseDouble(longitude)
-                                        );
-                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                    .setAction("Open", v -> {
+//                                        String uri = String.format(Locale.ENGLISH,
+//                                                "http://maps.google.com/maps?q=loc:%f,%f",
+//                                                Double.parseDouble(latitude),
+//                                                Double.parseDouble(longitude)
+//                                        );
+//                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                                        startActivity(intent);
+                                        Intent intent = new Intent(IssLocationActivity.this,MapViewActivity.class);
+                                        intent.putExtra("latitude",latitude);
+                                        intent.putExtra("longitude",longitude);
                                         startActivity(intent);
                                     })
                                     .setActionTextColor(Color.parseColor("#0099ff"))

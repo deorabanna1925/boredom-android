@@ -5,6 +5,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +20,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Boredom"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.DictionaryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.WhenIsTheNextMcuFilmActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activity.MapViewActivity"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".activity.ThisPersonDoesNotExistActivity"
             android:configChanges="orientation|screenSize"
