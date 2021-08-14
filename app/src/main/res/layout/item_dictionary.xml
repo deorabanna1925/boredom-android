@@ -27,15 +27,33 @@
             android:layout_height="1dp"
             android:background="?attr/backgroundColor"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/phonetic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="@string/app_name" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/backgroundColor"/>
 
+        <TextView
+            android:id="@+id/origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="@string/app_name" />
 
-
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/backgroundColor"/>
 
     </LinearLayout>
 

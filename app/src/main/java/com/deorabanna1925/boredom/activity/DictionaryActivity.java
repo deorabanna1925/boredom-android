@@ -21,9 +21,9 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class DictionaryActivity extends AppCompatActivity {
@@ -61,22 +61,6 @@ public class DictionaryActivity extends AppCompatActivity {
         queue.getCache().clear();
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
             try {
-                Object json = new JSONTokener(response).nextValue();
-                if (json instanceof JSONObject){
-                    JSONObject jsonObject = new JSONObject(response);
-
-                    String title = jsonObject.getString("title");
-                    String message = jsonObject.getString("message");
-                    String resolution = jsonObject.getString("resolution");
-
-                    Toast.makeText(this, ""+title, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, ""+resolution, Toast.LENGTH_SHORT).show();
-
-                    ArrayList<ModelDictionary> arrayList = new ArrayList<>();
-                    adapter = new DictionaryAdapter(DictionaryActivity.this, arrayList);
-                    binding.recyclerView.setAdapter(adapter);
-                } else if (json instanceof JSONArray) {
                     JSONArray jsonArray = new JSONArray(response);
                     binding.progressBar.setVisibility(View.GONE);
                     Gson gson = new Gson();
@@ -86,12 +70,36 @@ public class DictionaryActivity extends AppCompatActivity {
                     ArrayList<ModelDictionary> arrayList = gson.fromJson(jsonOutput, listType);
                     adapter = new DictionaryAdapter(DictionaryActivity.this, arrayList);
                     binding.recyclerView.setAdapter(adapter);
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }, error -> {
             binding.progressBar.setVisibility(View.GONE);
+            //get status code here
+            String statusCode = String.valueOf(error.networkResponse.statusCode);
+            //get response body and parse with appropriate encoding
+            if(error.networkResponse.data!=null) {
+                try {
+                    String response = new String(error.networkResponse.data, StandardCharsets.UTF_8);
+
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String title = jsonObject.getString("title");
+                    String message = jsonObject.getString("message");
+                    String resolution = jsonObject.getString("resolution");
+
+                    Toast.makeText(this, "" + title, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "" + resolution, Toast.LENGTH_SHORT).show();
+
+                    ArrayList<ModelDictionary> arrayList = new ArrayList<>();
+                    adapter = new DictionaryAdapter(DictionaryActivity.this, arrayList);
+                    binding.recyclerView.setAdapter(adapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         });
         queue.add(request);
     }

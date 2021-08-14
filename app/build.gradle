@@ -73,4 +73,7 @@ dependencies {
     //Open Map
     implementation 'org.osmdroid:osmdroid-android:6.1.10'
 
+    //OkHttpClient
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
 }
