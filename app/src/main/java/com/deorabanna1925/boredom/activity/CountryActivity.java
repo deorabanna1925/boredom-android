@@ -1,8 +1,6 @@
 package com.deorabanna1925.boredom.activity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +21,6 @@ import org.json.JSONException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CountryActivity extends AppCompatActivity {
 
@@ -108,4 +105,5 @@ public class CountryActivity extends AppCompatActivity {
         });
         queue.add(request);
     }
+
 }

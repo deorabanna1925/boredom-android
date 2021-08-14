@@ -19,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.deorabanna1925.boredom.databinding.ItemCountryBinding;
-import com.deorabanna1925.boredom.model.Currencies;
 import com.deorabanna1925.boredom.model.ModelCollege;
 import com.deorabanna1925.boredom.model.ModelCountry;
 import com.google.gson.Gson;
@@ -87,19 +86,19 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         }
 
         String symbol = "";
-        for(Currencies currency : model.getCurrencies()) {
+        for(ModelCountry.Currencies currency : model.getCurrencies()) {
             symbol += currency.getSymbol();
             holder.currencySymbol.setText(symbol);
             symbol += "\n";
         }
         String name = "";
-        for(Currencies currency : model.getCurrencies()) {
+        for(ModelCountry.Currencies currency : model.getCurrencies()) {
             name += currency.getName();
             holder.currencyName.setText(name);
             name += "\n";
         }
         String code = "";
-        for(Currencies currency : model.getCurrencies()) {
+        for(ModelCountry.Currencies currency : model.getCurrencies()) {
             code += currency.getCode();
             holder.currencyCode.setText(code);
             code += "\n";

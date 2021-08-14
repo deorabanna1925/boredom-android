@@ -247,4 +247,243 @@ public class ModelCountry {
     public void setCioc(String cioc) {
         this.cioc = cioc;
     }
+
+    public class Translations {
+
+        private String de;
+        private String es;
+        private String fr;
+        private String ja;
+        private String it;
+        private String br;
+        private String pt;
+        private String nl;
+        private String hr;
+        private String fa;
+
+        public Translations(String de, String es, String fr, String ja, String it, String br, String pt, String nl, String hr, String fa) {
+            this.de = de;
+            this.es = es;
+            this.fr = fr;
+            this.ja = ja;
+            this.it = it;
+            this.br = br;
+            this.pt = pt;
+            this.nl = nl;
+            this.hr = hr;
+            this.fa = fa;
+        }
+
+        public String getDe() {
+            return de;
+        }
+
+        public void setDe(String de) {
+            this.de = de;
+        }
+
+        public String getEs() {
+            return es;
+        }
+
+        public void setEs(String es) {
+            this.es = es;
+        }
+
+        public String getFr() {
+            return fr;
+        }
+
+        public void setFr(String fr) {
+            this.fr = fr;
+        }
+
+        public String getJa() {
+            return ja;
+        }
+
+        public void setJa(String ja) {
+            this.ja = ja;
+        }
+
+        public String getIt() {
+            return it;
+        }
+
+        public void setIt(String it) {
+            this.it = it;
+        }
+
+        public String getBr() {
+            return br;
+        }
+
+        public void setBr(String br) {
+            this.br = br;
+        }
+
+        public String getPt() {
+            return pt;
+        }
+
+        public void setPt(String pt) {
+            this.pt = pt;
+        }
+
+        public String getNl() {
+            return nl;
+        }
+
+        public void setNl(String nl) {
+            this.nl = nl;
+        }
+
+        public String getHr() {
+            return hr;
+        }
+
+        public void setHr(String hr) {
+            this.hr = hr;
+        }
+
+        public String getFa() {
+            return fa;
+        }
+
+        public void setFa(String fa) {
+            this.fa = fa;
+        }
+    }
+
+    public class RegionalBlocs {
+
+        private String acronym;
+        private String name;
+        private ArrayList<String> otherAcronyms;
+        private ArrayList<String> otherNames;
+
+        public RegionalBlocs(String acronym, String name, ArrayList<String> otherAcronyms, ArrayList<String> otherNames) {
+            this.acronym = acronym;
+            this.name = name;
+            this.otherAcronyms = otherAcronyms;
+            this.otherNames = otherNames;
+        }
+
+        public String getAcronym() {
+            return acronym;
+        }
+
+        public void setAcronym(String acronym) {
+            this.acronym = acronym;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public ArrayList<String> getOtherAcronyms() {
+            return otherAcronyms;
+        }
+
+        public void setOtherAcronyms(ArrayList<String> otherAcronyms) {
+            this.otherAcronyms = otherAcronyms;
+        }
+
+        public ArrayList<String> getOtherNames() {
+            return otherNames;
+        }
+
+        public void setOtherNames(ArrayList<String> otherNames) {
+            this.otherNames = otherNames;
+        }
+    }
+
+    public class Currencies {
+
+        private String code;
+        private String name;
+        private String symbol;
+
+        public Currencies(String code, String name, String symbol) {
+            this.code = code;
+            this.name = name;
+            this.symbol = symbol;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public void setSymbol(String symbol) {
+            this.symbol = symbol;
+        }
+    }
+
+    public class Languages {
+
+        private String iso639_1;
+        private String iso639_2;
+        private String name;
+        private String nativeName;
+
+        public Languages(String iso639_1, String iso639_2, String name, String nativeName) {
+            this.iso639_1 = iso639_1;
+            this.iso639_2 = iso639_2;
+            this.name = name;
+            this.nativeName = nativeName;
+        }
+
+        public String getIso639_1() {
+            return iso639_1;
+        }
+
+        public void setIso639_1(String iso639_1) {
+            this.iso639_1 = iso639_1;
+        }
+
+        public String getIso639_2() {
+            return iso639_2;
+        }
+
+        public void setIso639_2(String iso639_2) {
+            this.iso639_2 = iso639_2;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getNativeName() {
+            return nativeName;
+        }
+
+        public void setNativeName(String nativeName) {
+            this.nativeName = nativeName;
+        }
+    }
 }
+
