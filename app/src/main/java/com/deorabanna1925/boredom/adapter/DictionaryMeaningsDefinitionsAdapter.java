@@ -1,6 +1,8 @@
 package com.deorabanna1925.boredom.adapter;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -36,20 +38,31 @@ public class DictionaryMeaningsDefinitionsAdapter extends RecyclerView.Adapter<D
 
         holder.definition.setText(model.getDefinition());
         holder.example.setText(model.getExample());
-        String syn = "";
-        for(String synonyms : model.getSynonyms()){
-            syn = synonyms + ", ";
-            holder.synonyms.setText(syn);
-        }
-        String ant = "";
-        for(String antonyms : model.getAntonyms()){
-            ant = antonyms + ", ";
-            holder.antonyms.setText(ant);
+
+        String syn = "Synonyms :\n";
+        for (String synonyms : model.getSynonyms()) {
+            syn += " • ";
+            syn += synonyms;
+            boldText(syn,0,10,holder.synonyms);
+            syn += "\n";
         }
 
-
+        String ant = "Antonyms :\n";
+        for (String antonyms : model.getAntonyms()) {
+            ant += " • ";
+            ant += antonyms;
+            boldText(ant,0,10,holder.antonyms);
+            ant += "\n";
+        }
 
     }
+
+    private void boldText(String TEXT, int INT_START, int INT_END, TextView view) {
+        SpannableStringBuilder str = new SpannableStringBuilder(TEXT);
+        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), INT_START, INT_END, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        view.setText(str);
+    }
+
 
     @Override
     public int getItemCount() {
