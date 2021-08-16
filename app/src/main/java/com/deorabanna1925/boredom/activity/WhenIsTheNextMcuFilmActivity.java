@@ -2,10 +2,12 @@ package com.deorabanna1925.boredom.activity;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
@@ -36,6 +38,10 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
     private ActivityWhenIsTheNextMcuFilmBinding binding;
     private CircularProgressDrawable progressDrawable;
 
+    private String DATE_FORMAT = "yyyy-MM-dd";
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Runnable runnable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,47 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
 
     }
 
+    private void countDownStart(String title, String releaseDate, int daysUntil) {
+        runnable = new Runnable() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void run() {
+                try {
+                    handler.postDelayed(this, 1000);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(Objects.requireNonNull(dateFormat.parse(releaseDate)));
+                    c.add(Calendar.DATE, 1);
+                    Date date = c.getTime();
+                    String newDate = dateFormat.format(date.getTime());
+                    Date event_date = dateFormat.parse(newDate);
+                    Date current_date = new Date();
+                    if (!current_date.after(event_date)) {
+                        long diff = event_date.getTime() - current_date.getTime();
+                        long Days = diff / (24 * 60 * 60 * 1000);
+                        long Hours = diff / (60 * 60 * 1000) % 24;
+                        long Minutes = diff / (60 * 1000) % 60;
+                        long Seconds = diff / 1000 % 60;
+
+                        String movieRelease = title + " releases in " + daysUntil + " days!\n";
+                        String countdown = String.format("%02dd, %02dh, %02dm, %02ds",Days,Hours,Minutes,Seconds);
+
+                        binding.countdown.setText(countdown);
+                        binding.movieRelease.setText(movieRelease);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacks(runnable);
+    }
+
     private void getNextMovie(String dateStr) {
         String url = "https://www.whenisthenextmcufilm.com/api" + dateStr;
         final RequestQueue queue = Volley.newRequestQueue(this);
@@ -75,8 +122,7 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
                     binding.generateNew.setVisibility(View.GONE);
                 }
 
-                String movieRelease = title + " releases in " + days_until + " days!";
-                binding.movieRelease.setText(movieRelease);
+                countDownStart(title,release_date,days_until);
 
                 Glide.with(this)
                         .load(poster_url)
@@ -98,7 +144,7 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
 
                 binding.generateNew.setOnClickListener(view -> {
                     try {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
                         Calendar c = Calendar.getInstance();
                         c.setTime(Objects.requireNonNull(dateFormat.parse(release_date)));
                         c.add(Calendar.DATE, 1);
@@ -109,7 +155,6 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
                                 WhenIsTheNextMcuFilmActivity.class);
                         intent.putExtra("next","?date="+newDate);
                         startActivity(intent);
-
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

@@ -15,39 +15,57 @@
             android:id="@+id/background_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="300dp"
-            android:layout_height="500dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="0dp">
 
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/image"
+                <TextView
+                    android:id="@+id/countdown"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    tools:text="Countdown" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="420dp"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/movie_release"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:alpha="0.5"
-                    android:background="?attr/backgroundColor"
                     android:gravity="center"
                     android:padding="8dp"
+                    android:textStyle="bold"
                     android:textSize="16sp"
-                    tools:text="Movie releases in 00 days!"/>
+                    tools:text="Movie releases " />
 
-            </RelativeLayout>
-
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -66,7 +84,7 @@
                 android:layout_height="match_parent"
                 android:background="?attr/backgroundColor"
                 android:padding="16dp"
-                android:src="@drawable/ic_logo"/>
+                android:src="@drawable/ic_logo" />
 
         </androidx.cardview.widget.CardView>
 
