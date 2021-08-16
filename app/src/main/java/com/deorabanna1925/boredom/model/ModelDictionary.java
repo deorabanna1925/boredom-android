@@ -119,55 +119,55 @@ public class ModelDictionary {
         public void setDefinitions(ArrayList<Definitions> definitions) {
             this.definitions = definitions;
         }
-    }
 
-    public class Definitions {
+        public class Definitions {
 
-        private String definition;
-        private String example;
-        private ArrayList<String> synonyms;
-        private ArrayList<String> antonyms;
+            private String definition;
+            private String example;
+            private ArrayList<String> synonyms;
+            private ArrayList<String> antonyms;
 
-        public Definitions() {
-        }
+            public Definitions() {
+            }
 
-        public Definitions(String definition, String example, ArrayList<String> synonyms, ArrayList<String> antonyms) {
-            this.definition = definition;
-            this.example = example;
-            this.synonyms = synonyms;
-            this.antonyms = antonyms;
-        }
+            public Definitions(String definition, String example, ArrayList<String> synonyms, ArrayList<String> antonyms) {
+                this.definition = definition;
+                this.example = example;
+                this.synonyms = synonyms;
+                this.antonyms = antonyms;
+            }
 
-        public String getDefinition() {
-            return definition;
-        }
+            public String getDefinition() {
+                return definition;
+            }
 
-        public void setDefinition(String definition) {
-            this.definition = definition;
-        }
+            public void setDefinition(String definition) {
+                this.definition = definition;
+            }
 
-        public String getExample() {
-            return example;
-        }
+            public String getExample() {
+                return example;
+            }
 
-        public void setExample(String example) {
-            this.example = example;
-        }
+            public void setExample(String example) {
+                this.example = example;
+            }
 
-        public ArrayList<String> getSynonyms() {
-            return synonyms;
-        }
+            public ArrayList<String> getSynonyms() {
+                return synonyms;
+            }
 
-        public void setSynonyms(ArrayList<String> synonyms) {
-            this.synonyms = synonyms;
-        }
+            public void setSynonyms(ArrayList<String> synonyms) {
+                this.synonyms = synonyms;
+            }
 
-        public ArrayList<String> getAntonyms() {
-            return antonyms;
-        }
+            public ArrayList<String> getAntonyms() {
+                return antonyms;
+            }
 
-        public void setAntonyms(ArrayList<String> antonyms) {
-            this.antonyms = antonyms;
+            public void setAntonyms(ArrayList<String> antonyms) {
+                this.antonyms = antonyms;
+            }
         }
     }
 

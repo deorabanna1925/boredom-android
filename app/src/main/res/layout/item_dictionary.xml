@@ -36,6 +36,31 @@
             android:textStyle="bold"
             tools:text="@string/app_name" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/phonetics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_dictionary_phonetics" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/backgroundColor"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/meanings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_dictionary_meanings" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

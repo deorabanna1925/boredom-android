@@ -7,9 +7,9 @@ import android.media.PlaybackParams;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deorabanna1925.boredom.databinding.ItemDictionaryBinding;
@@ -41,26 +41,18 @@ public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.Vi
 
         holder.word.setText(model.getWord());
         holder.phonetic.setText(model.getPhonetic());
+
+        holder.phonetics.setLayoutManager(new LinearLayoutManager(context));
+        holder.phonetics.setNestedScrollingEnabled(false);
+        holder.phonetics.setHasFixedSize(true);
+        holder.phonetics.setAdapter(new DictionaryPhoneticsAdapter(context,model.getPhonetics()));
+
+        holder.meanings.setLayoutManager(new LinearLayoutManager(context));
+        holder.meanings.setNestedScrollingEnabled(false);
+        holder.meanings.setHasFixedSize(true);
+        holder.meanings.setAdapter(new DictionaryMeaningsAdapter(context,model.getMeanings()));
+
         holder.origin.setText(model.getOrigin());
-
-        holder.itemView.setOnClickListener(view -> {
-            if(model.getPhonetics().get(0).getAudio()!=null){
-                String audioUrl = "http:" + model.getPhonetics().get(0).getAudio();
-                playAudio(audioUrl,1.0f);
-            }else {
-                Toast.makeText(context, "No Audio", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.itemView.setOnLongClickListener(view -> {
-            if(model.getPhonetics().get(0).getAudio()!=null){
-                String audioUrl = "http:" + model.getPhonetics().get(0).getAudio();
-                playAudio(audioUrl,0.5f);
-            }else {
-                Toast.makeText(context, "No Audio", Toast.LENGTH_SHORT).show();
-            }
-            return true;
-        });
 
     }
 
@@ -99,13 +91,17 @@ public class DictionaryAdapter extends RecyclerView.Adapter<DictionaryAdapter.Vi
 
         public TextView word;
         public TextView phonetic;
+        public RecyclerView phonetics;
         public TextView origin;
+        public RecyclerView meanings;
 
         public ViewHolder(@NonNull ItemDictionaryBinding binding) {
             super(binding.getRoot());
             word = binding.word;
             phonetic = binding.phonetic;
+            phonetics = binding.phonetics;
             origin = binding.origin;
+            meanings = binding.meanings;
         }
 
     }
