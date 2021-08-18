@@ -65,7 +65,6 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
 
     private void countDownStart(String title, String releaseDate, int daysUntil) {
         runnable = new Runnable() {
-            @SuppressLint("DefaultLocale")
             @Override
             public void run() {
                 try {
@@ -79,6 +78,7 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
                     Date event_date = dateFormat.parse(newDate);
                     Date current_date = new Date();
                     if (!current_date.after(event_date)) {
+
                         long diff = event_date.getTime() - current_date.getTime();
                         long Days = diff / (24 * 60 * 60 * 1000);
                         long Hours = diff / (60 * 60 * 1000) % 24;
@@ -86,6 +86,7 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
                         long Seconds = diff / 1000 % 60;
 
                         String movieRelease = title + " releases in " + daysUntil + " days!\n";
+                        @SuppressLint("DefaultLocale")
                         String countdown = String.format("%02dd, %02dh, %02dm, %02ds",Days,Hours,Minutes,Seconds);
 
                         binding.countdown.setText(countdown);
