@@ -55,15 +55,15 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
         progressDrawable.setCenterRadius(30f);
         progressDrawable.start();
 
-        if(getIntent().getStringExtra("next")!=null){
+        if (getIntent().getStringExtra("next") != null) {
             getNextMovie(getIntent().getStringExtra("next"));
-        }else{
+        } else {
             getNextMovie("");
         }
 
     }
 
-    private void countDownStart(String title, String releaseDate, int daysUntil) {
+    private void countDownStart(String releaseDate) {
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -85,12 +85,10 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
                         long Minutes = diff / (60 * 1000) % 60;
                         long Seconds = diff / 1000 % 60;
 
-                        String movieRelease = title + " releases in " + daysUntil + " days!\n";
                         @SuppressLint("DefaultLocale")
-                        String countdown = String.format("%02dd, %02dh, %02dm, %02ds",Days,Hours,Minutes,Seconds);
+                        String countdown = String.format("%02dd, %02dh, %02dm, %02ds", Days, Hours, Minutes, Seconds);
 
                         binding.countdown.setText(countdown);
-                        binding.movieRelease.setText(movieRelease);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -113,17 +111,23 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 String title = jsonObject.getString("title");
+                String type = jsonObject.getString("type");
+                String overview = jsonObject.getString("overview");
                 String poster_url = jsonObject.getString("poster_url");
                 int days_until = jsonObject.getInt("days_until");
-                String release_date = jsonObject.getString("release_date");
+                String releaseDate = jsonObject.getString("release_date");
                 JSONObject followingProduction = jsonObject.getJSONObject("following_production");
-                if(followingProduction.length()!=0){
+                if (followingProduction.length() != 0) {
                     binding.generateNew.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     binding.generateNew.setVisibility(View.GONE);
                 }
 
-                countDownStart(title,release_date,days_until);
+                binding.movieName.setText(title);
+                binding.releaseDate.setText(releaseDate);
+                binding.overview.setText(overview);
+                binding.type.setText(type);
+                countDownStart(releaseDate);
 
                 Glide.with(this)
                         .load(poster_url)
@@ -147,14 +151,14 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
                     try {
                         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
                         Calendar c = Calendar.getInstance();
-                        c.setTime(Objects.requireNonNull(dateFormat.parse(release_date)));
+                        c.setTime(Objects.requireNonNull(dateFormat.parse(releaseDate)));
                         c.add(Calendar.DATE, 1);
                         Date date = c.getTime();
                         String newDate = dateFormat.format(date.getTime());
 
                         Intent intent = new Intent(WhenIsTheNextMcuFilmActivity.this,
                                 WhenIsTheNextMcuFilmActivity.class);
-                        intent.putExtra("next","?date="+newDate);
+                        intent.putExtra("next", "?date=" + newDate);
                         startActivity(intent);
                     } catch (ParseException e) {
                         e.printStackTrace();

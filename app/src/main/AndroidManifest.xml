@@ -21,6 +21,12 @@
         android:theme="@style/Theme.Boredom"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.GitHubTrendingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.RandomUserActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.TvShowsActivity"
             android:exported="true" />
         <activity
