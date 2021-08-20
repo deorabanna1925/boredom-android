@@ -1,5 +1,6 @@
 package com.deorabanna1925.boredom;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -58,9 +59,9 @@ public class DashboardActivity extends AppCompatActivity {
         actionBar.setTitle(getHomeTitle());
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     private void setupBottomNavigation() {
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
+        binding.bottomNavigation.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.bottom_nav_home:
