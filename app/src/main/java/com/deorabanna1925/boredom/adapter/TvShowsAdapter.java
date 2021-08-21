@@ -1,6 +1,7 @@
 package com.deorabanna1925.boredom.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.deorabanna1925.boredom.R;
+import com.deorabanna1925.boredom.activity.TvShowDetailsActivity;
 import com.deorabanna1925.boredom.databinding.ItemTvShowSearchBinding;
 import com.deorabanna1925.boredom.model.ModelTvShow;
 
@@ -63,6 +65,10 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.ViewHold
                     .into(holder.image);
             holder.image.setAdjustViewBounds(true);
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, TvShowDetailsActivity.class).putExtra("id",model.getId()));
+        });
 
     }
 
