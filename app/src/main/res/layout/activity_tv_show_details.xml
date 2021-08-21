@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="none"
+    android:background="?attr/backgroundColor"
     tools:context=".activity.TvShowDetailsActivity">
 
     <LinearLayout
@@ -15,7 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="620dp">
+            android:layout_height="540dp">
 
             <ImageView
                 android:id="@+id/image_background"
@@ -23,14 +24,20 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/color_liner_gradient_bottom_top" />
+
             <androidx.cardview.widget.CardView
-                android:layout_width="300dp"
-                android:layout_height="420dp"
+                android:layout_width="280dp"
+                android:layout_height="480dp"
                 android:layout_centerInParent="true"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="80dp"
+                android:layout_marginBottom="60dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
@@ -42,41 +49,54 @@
 
             </androidx.cardview.widget.CardView>
 
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:padding="4dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="4dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="4dp">
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/type"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="14sp"
-                        tools:text="Type" />
-
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:text="Movie releases " />
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
