@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.deorabanna1925.boredom.activity.TvShowDetailsActivity;
+import com.deorabanna1925.boredom.activity.TvShowsActivity;
 import com.deorabanna1925.boredom.databinding.ItemTvShowSearchBinding;
 import com.deorabanna1925.boredom.model.ModelTvShow;
 
@@ -65,6 +66,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.ViewHold
         holder.image.setAdjustViewBounds(true);
 
         holder.itemView.setOnClickListener(v -> {
+            ((TvShowsActivity) context).addToSearchHistory(modelTvShow);
             context.startActivity(new Intent(context, TvShowDetailsActivity.class).putExtra("id",model.getId()));
         });
 
