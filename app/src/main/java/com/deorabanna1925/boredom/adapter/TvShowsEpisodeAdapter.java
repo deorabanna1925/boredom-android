@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,47 +13,46 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.deorabanna1925.boredom.activity.TvShowDetailsActivity;
-import com.deorabanna1925.boredom.databinding.ItemTvShowSeasonBinding;
+import com.deorabanna1925.boredom.databinding.ItemTvShowEpisodeBinding;
 import com.deorabanna1925.boredom.model.ModelTvShow;
 
 import java.util.ArrayList;
 
-public class TvShowsSeasonAdapter extends RecyclerView.Adapter<TvShowsSeasonAdapter.ViewHolder> {
+public class TvShowsEpisodeAdapter extends RecyclerView.Adapter<TvShowsEpisodeAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<ModelTvShow.Season> arrayList;
+    private ArrayList<ModelTvShow.Episode> arrayList;
 
-    public TvShowsSeasonAdapter(Context context, ArrayList<ModelTvShow.Season> arrayList) {
+    public TvShowsEpisodeAdapter(Context context, ArrayList<ModelTvShow.Episode> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public TvShowsSeasonAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemTvShowSeasonBinding binding = ItemTvShowSeasonBinding.inflate(LayoutInflater.from(context), parent, false);
+    public TvShowsEpisodeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemTvShowEpisodeBinding binding = ItemTvShowEpisodeBinding.inflate(LayoutInflater.from(context), parent, false);
         return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TvShowsSeasonAdapter.ViewHolder holder, int position) {
-        ModelTvShow.Season model = arrayList.get(position);
+    public void onBindViewHolder(@NonNull TvShowsEpisodeAdapter.ViewHolder holder, int position) {
+        ModelTvShow.Episode model = arrayList.get(position);
 
         CircularProgressDrawable progressDrawable = new CircularProgressDrawable(context);
         progressDrawable.setStrokeWidth(5f);
         progressDrawable.setCenterRadius(30f);
         progressDrawable.start();
 
-        if (model.getImage() != null) {
+        if(model.getImage()!=null){
             Glide.with(context)
-                    .load(model.getImage().getMedium())
+                    .load(model.getImage().getOriginal())
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .placeholder(progressDrawable)
                     .skipMemoryCache(true)
                     .into(holder.image);
-        } else {
+        }else {
             Glide.with(context)
                     .load("https://static.tvmaze.com/images/no-img/no-img-portrait-text.png")
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -60,21 +60,22 @@ public class TvShowsSeasonAdapter extends RecyclerView.Adapter<TvShowsSeasonAdap
                     .skipMemoryCache(true)
                     .into(holder.image);
         }
-        holder.image.setAdjustViewBounds(true);
+
+        if(model.getName()!=null){
+            holder.name.setText(model.getName());
+        }
+        if(model.getSeason()!=null){
+            holder.season.setText("S"+model.getSeason());
+        }
+        if(model.getNumber()!=null){
+            holder.episode.setText("E"+model.getNumber());
+        }
+        if(model.getAirdate()!=null){
+            holder.airDate.setText(model.getAirdate());
+        }
 
         holder.itemView.setOnClickListener(v -> {
-            if (model.getId() != null) {
-                if(model.getName()!=null){
-                    if(model.getName().equals("")) {
-                        if (model.getNumber() != null) {
-                            ((TvShowDetailsActivity) context).seasonNameViewAll("Season " + model.getNumber(), true);
-                        }
-                    }else {
-                        ((TvShowDetailsActivity) context).seasonNameViewAll(model.getName(), true);
-                    }
-                }
-                ((TvShowDetailsActivity) context).getTvShowSeasonEpisodeData(model.getId().toString());
-            }
+//            context.startActivity(new Intent(context, TvShowDetailsActivity.class).putExtra("id",model.getId()));
         });
 
     }
@@ -87,10 +88,18 @@ public class TvShowsSeasonAdapter extends RecyclerView.Adapter<TvShowsSeasonAdap
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView image;
+        public TextView name;
+        public TextView season;
+        public TextView episode;
+        public TextView airDate;
 
-        public ViewHolder(@NonNull ItemTvShowSeasonBinding binding) {
+        public ViewHolder(@NonNull ItemTvShowEpisodeBinding binding) {
             super(binding.getRoot());
             image = binding.image;
+            name = binding.name;
+            season = binding.season;
+            episode = binding.episode;
+            airDate = binding.airDate;
         }
 
     }
