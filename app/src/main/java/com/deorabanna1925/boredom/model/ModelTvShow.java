@@ -821,5 +821,195 @@ public class ModelTvShow {
         }
     }
 
+    public class Cast {
+
+        private Person person;
+        private Character character;
+        private Boolean self;
+        private Boolean voice;
+
+        public Cast() {
+        }
+
+        public Cast(Person person, Character character, Boolean self, Boolean voice) {
+            this.person = person;
+            this.character = character;
+            this.self = self;
+            this.voice = voice;
+        }
+
+        public Person getPerson() {
+            return person;
+        }
+
+        public void setPerson(Person person) {
+            this.person = person;
+        }
+
+        public Character getCharacter() {
+            return character;
+        }
+
+        public void setCharacter(Character character) {
+            this.character = character;
+        }
+
+        public Boolean getSelf() {
+            return self;
+        }
+
+        public void setSelf(Boolean self) {
+            this.self = self;
+        }
+
+        public Boolean getVoice() {
+            return voice;
+        }
+
+        public void setVoice(Boolean voice) {
+            this.voice = voice;
+        }
+
+        public class Person {
+
+            private Integer id;
+            private String url;
+            private String name;
+            private Show.Network.Country country;
+            private String birthday;
+            private String deathday;
+            private String gender;
+            private Show.Image image;
+
+            public Person() {
+            }
+
+            public Person(Integer id, String url, String name, Show.Network.Country country, String birthday, String deathday, String gender, Show.Image image) {
+                this.id = id;
+                this.url = url;
+                this.name = name;
+                this.country = country;
+                this.birthday = birthday;
+                this.deathday = deathday;
+                this.gender = gender;
+                this.image = image;
+            }
+
+            public Integer getId() {
+                return id;
+            }
+
+            public void setId(Integer id) {
+                this.id = id;
+            }
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public Show.Network.Country getCountry() {
+                return country;
+            }
+
+            public void setCountry(Show.Network.Country country) {
+                this.country = country;
+            }
+
+            public String getBirthday() {
+                return birthday;
+            }
+
+            public void setBirthday(String birthday) {
+                this.birthday = birthday;
+            }
+
+            public String getDeathday() {
+                return deathday;
+            }
+
+            public void setDeathday(String deathday) {
+                this.deathday = deathday;
+            }
+
+            public String getGender() {
+                return gender;
+            }
+
+            public void setGender(String gender) {
+                this.gender = gender;
+            }
+
+            public Show.Image getImage() {
+                return image;
+            }
+
+            public void setImage(Show.Image image) {
+                this.image = image;
+            }
+        }
+
+        public class Character {
+
+            private Integer id;
+            private String url;
+            private String name;
+            private Show.Image image;
+
+            public Character() {
+            }
+
+            public Character(Integer id, String url, String name, Show.Image image) {
+                this.id = id;
+                this.url = url;
+                this.name = name;
+                this.image = image;
+            }
+
+            public Integer getId() {
+                return id;
+            }
+
+            public void setId(Integer id) {
+                this.id = id;
+            }
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public Show.Image getImage() {
+                return image;
+            }
+
+            public void setImage(Show.Image image) {
+                this.image = image;
+            }
+        }
+
+    }
 
 }

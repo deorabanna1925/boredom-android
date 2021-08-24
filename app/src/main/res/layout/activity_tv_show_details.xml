@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="8dp"
-                android:text="@string/app_name"
+                tools:text="@string/app_name"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -133,6 +133,14 @@
                 android:orientation="horizontal" />
 
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="16dp"
+            android:paddingBottom="32dp" />
 
     </LinearLayout>
 

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.deorabanna1925.boredom.adapter.TvShowsCastAdapter;
 import com.deorabanna1925.boredom.adapter.TvShowsEpisodeAdapter;
 import com.deorabanna1925.boredom.adapter.TvShowsSeasonAdapter;
 import com.deorabanna1925.boredom.databinding.ActivityTvShowDetailsBinding;
@@ -53,10 +55,9 @@ public class TvShowDetailsActivity extends AppCompatActivity {
         int id = getIntent().getIntExtra("id", 1);
 
         getTvShowData(String.valueOf(id));
+        getTvShowCastData(String.valueOf(id));
         getTvShowSeasonData(String.valueOf(id));
         getTvShowAllEpisodeData(String.valueOf(id));
-
-        seasonNameViewAll("All Episodes", false);
 
     }
 
@@ -139,6 +140,8 @@ public class TvShowDetailsActivity extends AppCompatActivity {
                     binding.summary.setText(Html.fromHtml(model.getSummary()));
                 }
 
+                seasonNameViewAll("All Episodes", false);
+
                 binding.viewAll.setOnClickListener(v -> {
                     int i = getIntent().getIntExtra("id", 1);
                     seasonNameViewAll("All Episodes", false);
@@ -171,6 +174,32 @@ public class TvShowDetailsActivity extends AppCompatActivity {
                 ArrayList<ModelTvShow.Season> arrayList = gson.fromJson(jsonOutput, listType);
                 TvShowsSeasonAdapter adapter = new TvShowsSeasonAdapter(TvShowDetailsActivity.this, arrayList);
                 binding.recyclerView.setAdapter(adapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+//            binding.progressBar.setVisibility(View.GONE);
+        });
+        queue.add(request);
+    }
+
+    private void getTvShowCastData(String id) {
+        binding.recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.recyclerViewCast.setNestedScrollingEnabled(false);
+        binding.recyclerViewCast.setHasFixedSize(true);
+        String url = "https://api.tvmaze.com/shows/" + id + "/cast";
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        queue.getCache().clear();
+        StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
+            try {
+                JSONArray jsonArray = new JSONArray(response);
+                Gson gson = new Gson();
+                String jsonOutput = jsonArray.toString();
+                Type listType = new TypeToken<ArrayList<ModelTvShow.Cast>>() {
+                }.getType();
+                ArrayList<ModelTvShow.Cast> arrayList = gson.fromJson(jsonOutput, listType);
+                TvShowsCastAdapter adapter = new TvShowsCastAdapter(TvShowDetailsActivity.this, arrayList);
+                binding.recyclerViewCast.setAdapter(adapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
