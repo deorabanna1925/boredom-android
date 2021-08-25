@@ -3,13 +3,17 @@ package com.deorabanna1925.boredom.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
@@ -49,11 +53,18 @@ public class GitHubTrendingAdapter extends RecyclerView.Adapter<GitHubTrendingAd
         progressDrawable.setCenterRadius(30f);
         progressDrawable.start();
 
-        if(model.getAvatar()!=null){
+        if (model.getAvatar() != null) {
             Glide.with(context)
                     .load(model.getAvatar())
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(holder.image);
+        }
+        if(model.getLangColor()!=null){
+            Drawable buttonDrawable = holder.backgroundColor.getBackground();
+            buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+            //the color is a direct color int and not a color resource
+            DrawableCompat.setTint(buttonDrawable, Color.parseColor(model.getLangColor()));
+            holder.backgroundColor.setBackground(buttonDrawable);
         }
 
         holder.author.setText(model.getAuthor());
@@ -76,6 +87,7 @@ public class GitHubTrendingAdapter extends RecyclerView.Adapter<GitHubTrendingAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private LinearLayout backgroundColor;
         public CircleImageView image;
         public TextView author;
         public TextView name;
@@ -88,6 +100,7 @@ public class GitHubTrendingAdapter extends RecyclerView.Adapter<GitHubTrendingAd
         public ViewHolder(@NonNull ItemGithubTrendingBinding binding) {
             super(binding.getRoot());
 
+            backgroundColor = binding.backgroundColor;
             image = binding.image;
             author = binding.author;
             name = binding.name;
