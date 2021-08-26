@@ -2,6 +2,7 @@ package com.deorabanna1925.boredom.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class GitHubTrendingActivity extends AppCompatActivity {
 
     private ActivityGitHubTrendingBinding binding;
+    private ArrayList<String> languagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +39,70 @@ public class GitHubTrendingActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setTitle("GitHub Trending");
 
-        getData();
+        setPeriodSpinner();
+        getLanguages();
+
+        binding.apply.setOnClickListener(v -> getData());
+
+        String url = "https://api.trending-github.com/github/repositories?period=daily";
+        getTrendingData(url);
 
     }
 
+    private void getLanguages() {
+        String url = "https://api.trending-github.com/github/languages";
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        queue.getCache().clear();
+        StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
+            try {
+                JSONArray jsonArray = new JSONArray(response);
+                Gson gson = new Gson();
+                String jsonOutput = jsonArray.toString();
+                Type listType = new TypeToken<ArrayList<String>>() {
+                }.getType();
+                languagesList = gson.fromJson(jsonOutput, listType);
+                setLanguageSpinner();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+        });
+        queue.add(request);
+    }
+
+    private void setPeriodSpinner() {
+        String[] items = new String[]{"daily", "weekly", "monthly"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        binding.period.setAdapter(adapter);
+    }
+
+    private void setLanguageSpinner() {
+        languagesList.add(0, "all");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, languagesList);
+        binding.language.setAdapter(adapter);
+    }
+
     private void getData() {
+        ArrayList<ModelGitHub> arrayList = new ArrayList<>();
+        GitHubTrendingAdapter adapter = new GitHubTrendingAdapter(GitHubTrendingActivity.this, arrayList);
+        binding.recyclerView.setAdapter(adapter);
+        String period = binding.period.getSelectedItem().toString();
+        String language = binding.language.getSelectedItem().toString();
+        String url;
+        if (language.equals("all")) {
+            url = "https://api.trending-github.com/github/repositories?period=" + period;
+        } else {
+            url = "https://api.trending-github.com/github/repositories?period=" + period + "&language=" + language;
+        }
+        getTrendingData(url);
+
+    }
+
+    private void getTrendingData(String url) {
+        binding.progressBar.setVisibility(View.VISIBLE);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setNestedScrollingEnabled(false);
         binding.recyclerView.setHasFixedSize(true);
-        String url = "https://api.trending-github.com/github/repositories?period=daily";
         final RequestQueue queue = Volley.newRequestQueue(this);
         queue.getCache().clear();
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {

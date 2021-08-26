@@ -26,6 +26,18 @@ public class SplashActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.hide();
 
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            final WindowInsetsController insetsController = getWindow().getInsetsController();
+//            if (insetsController != null) {
+//                insetsController.hide(WindowInsets.Type.statusBars());
+//            }
+//        } else {
+//            getWindow().setFlags(
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN
+//            );
+//        }
+
         new Handler(getMainLooper()).postDelayed(() -> {
             Intent mainIntent = new Intent(SplashActivity.this, DashboardActivity.class);
             SplashActivity.this.startActivity(mainIntent);
