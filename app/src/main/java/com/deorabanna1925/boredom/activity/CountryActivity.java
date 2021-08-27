@@ -59,44 +59,6 @@ public class CountryActivity extends AppCompatActivity {
                         (tab, position) -> tab.setText(arrayList.get(position).getName())
                 ).attach();
 
-                binding.searchBar.setVisibility(View.GONE);
-/*                binding.searchBar.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        if(charSequence.toString().trim().length() != 0){
-                            ArrayList<ModelCountry> searchResult = new ArrayList<>();
-                            for(ModelCountry country : arrayList){
-                                if(country.getName().toLowerCase(Locale.ROOT).contains(charSequence.toString().toLowerCase(Locale.ROOT))){
-                                    searchResult.add(country);
-                                }
-                            }
-                            adapter = new CountryAdapter(CountryActivity.this, searchResult);
-                            binding.viewpager.setAdapter(adapter);
-                            binding.viewpager.setOffscreenPageLimit(1);
-                            new TabLayoutMediator(binding.tabs, binding.viewpager,
-                                    (tab, position) -> tab.setText(searchResult.get(position).getName())
-                            ).attach();
-                        }else{
-                            adapter = new CountryAdapter(CountryActivity.this, arrayList);
-                            binding.viewpager.setAdapter(adapter);
-                            binding.viewpager.setOffscreenPageLimit(1);
-                            new TabLayoutMediator(binding.tabs, binding.viewpager,
-                                    (tab, position) -> tab.setText(arrayList.get(position).getName())
-                            ).attach();
-                        }
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-
-                    }
-                });*/
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
