@@ -31,7 +31,6 @@ public class TvShowsActivity extends AppCompatActivity {
 
     private ActivityTvShowsBinding binding;
 
-    private static final String SEARCH_HISTORY_KEY = "_SEARCH_HISTORY_KEY";
     private static final int MAX_HISTORY_ITEMS = 10;
 
     private TvShowsAdapter adapter;
@@ -135,11 +134,11 @@ public class TvShowsActivity extends AppCompatActivity {
         if (searchArrayList.size() > MAX_HISTORY_ITEMS) searchArrayList.remove(0);
         Type listType = new TypeToken<ArrayList<ModelTvShow>>() {}.getType();
         String json = new Gson().toJson(searchArrayList, listType);
-        prefs.setString(SEARCH_HISTORY_KEY,json);
+        prefs.setTvShowSearchHistory(json);
     }
 
     private ArrayList<ModelTvShow> getSearchHistory() {
-        String previousSearch = prefs.getString(SEARCH_HISTORY_KEY);
+        String previousSearch = prefs.getTvShowSearchHistory();
         if (previousSearch.equals("")) return new ArrayList<>();
         Gson gson = new Gson();
         Type listType = new TypeToken<ArrayList<ModelTvShow>>() {

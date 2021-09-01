@@ -15,6 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.deorabanna1925.boredom.databinding.ItemTvShowCastBinding;
 import com.deorabanna1925.boredom.model.ModelTvShow;
+import com.stfalcon.imageviewer.StfalconImageViewer;
 
 import java.util.ArrayList;
 
@@ -22,10 +23,13 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
 
     private Context context;
     private ArrayList<ModelTvShow.Cast> arrayList;
+    private ArrayList<String> imagesPerson, imagesCharacter;
 
     public TvShowsCastAdapter(Context context, ArrayList<ModelTvShow.Cast> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
+        this.imagesPerson = new ArrayList<>();
+        this.imagesCharacter = new ArrayList<>();
     }
 
     @NonNull
@@ -45,6 +49,7 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
         progressDrawable.start();
 
         if (model.getPerson().getImage() != null) {
+            imagesPerson.add(model.getPerson().getImage().getOriginal());
             Glide.with(context)
                     .load(model.getPerson().getImage().getMedium())
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -53,6 +58,7 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
                     .skipMemoryCache(true)
                     .into(holder.personImage);
         } else {
+            imagesPerson.add("https://static.tvmaze.com/images/no-img/no-img-portrait-text.png");
             Glide.with(context)
                     .load("https://static.tvmaze.com/images/no-img/no-img-portrait-text.png")
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -63,6 +69,7 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
         holder.personImage.setAdjustViewBounds(true);
 
         if (model.getCharacter().getImage() != null) {
+            imagesCharacter.add(model.getCharacter().getImage().getOriginal());
             Glide.with(context)
                     .load(model.getCharacter().getImage().getMedium())
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -71,6 +78,7 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
                     .skipMemoryCache(true)
                     .into(holder.characterImage);
         } else {
+            imagesCharacter.add("https://static.tvmaze.com/images/no-img/no-img-portrait-text.png");
             Glide.with(context)
                     .load("https://static.tvmaze.com/images/no-img/no-img-portrait-text.png")
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -80,14 +88,25 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
         }
         holder.characterImage.setAdjustViewBounds(true);
 
-        if(model.getPerson().getName()!=null){
+        holder.personImage.setOnClickListener(v -> fullScreenView(imagesPerson,position, holder.personImage));
+        holder.characterImage.setOnClickListener(v -> fullScreenView(imagesCharacter,position, holder.characterImage));
+
+        if (model.getPerson().getName() != null) {
             holder.personName.setText(model.getPerson().getName());
         }
 
-        if(model.getCharacter().getName()!=null){
+        if (model.getCharacter().getName() != null) {
             holder.characterName.setText(model.getCharacter().getName());
         }
 
+    }
+
+    private void fullScreenView(ArrayList<String> images, int position, ImageView view) {
+        new StfalconImageViewer.Builder<>(context, images, (imageView, image) ->
+                Glide.with(context).load(image).into(imageView)).withStartPosition(position)
+                .withHiddenStatusBar(false)
+                .withTransitionFrom(view)
+                .show();
     }
 
     @Override
