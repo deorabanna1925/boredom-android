@@ -6,12 +6,14 @@ import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.deorabanna1925.boredom.databinding.ActivityDashboardBinding;
 import com.deorabanna1925.boredom.fragment.ExploreFragment;
 import com.deorabanna1925.boredom.fragment.HomeFragment;
 import com.deorabanna1925.boredom.fragment.SettingsFragment;
+import com.deorabanna1925.boredom.shared.Prefs;
 
 import java.util.Calendar;
 
@@ -19,10 +21,13 @@ public class DashboardActivity extends AppCompatActivity {
 
     private ActivityDashboardBinding binding;
     private ActionBar actionBar;
+    private Prefs prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefs = new Prefs(this);
+        getDefaultTheme(prefs.getTheme());
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -31,6 +36,21 @@ public class DashboardActivity extends AppCompatActivity {
         setupDefaultHomeScreen();
         setupBottomNavigation();
 
+    }
+
+    private void getDefaultTheme(int theme) {
+        switch (theme) {
+            case 1:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case 2:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case -1:
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+        }
     }
 
     private void setupDefaultHomeScreen() {
