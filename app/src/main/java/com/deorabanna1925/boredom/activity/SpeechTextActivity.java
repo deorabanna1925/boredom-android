@@ -2,6 +2,9 @@ package com.deorabanna1925.boredom.activity;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.speech.RecognizerIntent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -28,7 +32,9 @@ public class SpeechTextActivity extends AppCompatActivity {
         binding = ActivitySpeechTextBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().setTitle("Speech to Text");
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle("Speech to Text");
 
         binding.mic.setOnClickListener(view -> {
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
@@ -44,6 +50,18 @@ public class SpeechTextActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Sorry your device not supported", Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+
+        binding.clearText.setOnClickListener(v -> {
+            binding.text.setText(null);
+        });
+
+        binding.copyText.setOnClickListener(v -> {
+            String copyContent = binding.text.getText().toString();
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copy Content", copyContent);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "Copy to Clipboard", Toast.LENGTH_SHORT).show();
         });
 
     }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -31,7 +32,9 @@ public class ColorsActivity extends AppCompatActivity {
         binding = ActivityColorsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
 
         binding.generateNew.setOnClickListener(view -> getColorData());
 
@@ -85,9 +88,7 @@ public class ColorsActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, error -> {
-            binding.progressBar.setVisibility(View.GONE);
-        });
+        }, error -> binding.progressBar.setVisibility(View.GONE));
         queue.add(request);
     }
 

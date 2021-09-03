@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.deorabanna1925.boredom.databinding.ActivityTextSpeechBinding;
@@ -20,8 +21,10 @@ public class TextSpeechActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTextSpeechBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
-        getSupportActionBar().setTitle("Text to Speech");
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle("Text to Speech");
 
         textToSpeech = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {

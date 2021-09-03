@@ -17,6 +17,10 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <EditText
                 android:id="@+id/text"
                 android:layout_width="match_parent"
@@ -28,6 +32,7 @@
                 android:padding="8dp"
                 android:textSize="24sp"/>
 
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

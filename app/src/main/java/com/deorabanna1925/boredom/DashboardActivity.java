@@ -2,7 +2,6 @@ package com.deorabanna1925.boredom;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +28,7 @@ public class DashboardActivity extends AppCompatActivity {
         prefs = new Prefs(this);
         getDefaultTheme(prefs.getTheme());
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
         setupActionBar();
         setupDefaultHomeScreen();
