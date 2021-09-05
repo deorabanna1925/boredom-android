@@ -28,7 +28,6 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
 
         prefs = new Prefs(requireActivity());
 
@@ -48,7 +47,7 @@ public class SettingsFragment extends Fragment {
         binding.faq.setOnClickListener(v -> Toast.makeText(requireContext(), "" + ((TextView) v).getText().toString(), Toast.LENGTH_SHORT).show());
         binding.privacyPolicy.setOnClickListener(v -> Toast.makeText(requireContext(), "" + ((TextView) v).getText().toString(), Toast.LENGTH_SHORT).show());
 
-        return view;
+        return binding.getRoot();
     }
 
     private void openThemeDialog() {

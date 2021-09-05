@@ -47,7 +47,6 @@ public class ExploreFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentExploreBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setNestedScrollingEnabled(false);
@@ -75,6 +74,6 @@ public class ExploreFragment extends Fragment {
         adapter = new ExploreAdapter(getActivity(), arrayList);
         binding.recyclerView.setAdapter(adapter);
 
-        return view;
+        return binding.getRoot();
     }
 }
