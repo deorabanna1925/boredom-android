@@ -85,6 +85,20 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             utc += "\n";
         }
 
+        String language = "";
+        for(ModelCountry.Languages languages : model.getLanguages()) {
+            language += languages.getName();
+            holder.language.setText(language);
+            language += "\n";
+        }
+
+        String nativeLanguage = "";
+        for(ModelCountry.Languages languages : model.getLanguages()) {
+            nativeLanguage += languages.getNativeName();
+            holder.nativeLanguage.setText(nativeLanguage);
+            nativeLanguage += "\n";
+        }
+
         String symbol = "";
         for(ModelCountry.Currencies currency : model.getCurrencies()) {
             symbol += currency.getSymbol();
@@ -194,6 +208,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public TextView population;
         public TextView searchGoogle;
         public TextView viewOnMap;
+        public TextView language;
+        public TextView nativeLanguage;
         public TextView currencyCode;
         public TextView currencyName;
         public TextView currencySymbol;
@@ -218,6 +234,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             region = binding.region;
             searchGoogle = binding.searchGoogle;
             viewOnMap = binding.viewOnMap;
+            language = binding.language;
+            nativeLanguage = binding.nativeLanguage;
             currencyCode = binding.currencyCode;
             currencyName = binding.currencyName;
             currencySymbol = binding.currencySymbol;
