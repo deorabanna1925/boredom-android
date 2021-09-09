@@ -15,15 +15,15 @@
 
         <ImageView
             android:id="@+id/person_image"
-            android:layout_width="200dp"
-            android:layout_height="280dp" />
+            android:layout_width="100dp"
+            android:layout_height="140dp" />
 
         <TextView
             android:id="@+id/person_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="8dp"
+            android:padding="2dp"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -39,15 +39,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="8dp"
+            android:padding="2dp"
             android:textSize="16sp"
             android:textStyle="bold" />
 
 
         <ImageView
             android:id="@+id/character_image"
-            android:layout_width="200dp"
-            android:layout_height="280dp" />
+            android:layout_width="100dp"
+            android:layout_height="140dp" />
 
     </LinearLayout>
 
