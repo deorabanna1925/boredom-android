@@ -203,9 +203,7 @@ public class TvShowDetailsActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, error -> {
-//            binding.progressBar.setVisibility(View.GONE);
-        });
+        }, error -> {});
         queue.add(request);
     }
 
