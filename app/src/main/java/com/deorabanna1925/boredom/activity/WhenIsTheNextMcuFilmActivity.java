@@ -55,12 +55,16 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
         progressDrawable.setCenterRadius(30f);
         progressDrawable.start();
 
+    }
+
+    @Override
+    protected void onResume() {
         if (getIntent().getStringExtra("next") != null) {
             getNextMovie(getIntent().getStringExtra("next"));
         } else {
             getNextMovie("");
         }
-
+        super.onResume();
     }
 
     private void countDownStart(String releaseDate) {

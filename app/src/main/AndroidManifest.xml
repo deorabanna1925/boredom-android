@@ -21,6 +21,9 @@
         android:theme="@style/Theme.Boredom"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.SpaceLaunchActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.FoodsActivity"
             android:exported="true"
             android:theme="@style/TranslucentBar" />

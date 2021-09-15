@@ -20,6 +20,7 @@ import com.deorabanna1925.boredom.activity.IssLocationActivity;
 import com.deorabanna1925.boredom.activity.KanyeWestActivity;
 import com.deorabanna1925.boredom.activity.RandomUserActivity;
 import com.deorabanna1925.boredom.activity.SomethingActivity;
+import com.deorabanna1925.boredom.activity.SpaceLaunchActivity;
 import com.deorabanna1925.boredom.activity.SpeechTextActivity;
 import com.deorabanna1925.boredom.activity.TextSpeechActivity;
 import com.deorabanna1925.boredom.activity.ThisPersonDoesNotExistActivity;
@@ -61,6 +62,7 @@ public class ExploreFragment extends Fragment {
         arrayList.add(new ModelExplore("Country Activity", "Know about different countries", CountryActivity.class));
         arrayList.add(new ModelExplore("Random Activity", "Bored try something new", SomethingActivity.class));
         arrayList.add(new ModelExplore("Random Food", "Get Random Food Item", FoodsActivity.class));
+        arrayList.add(new ModelExplore("Upcoming Space Launches", "Get Information about Upcoming Space Launches", SpaceLaunchActivity.class));
         arrayList.add(new ModelExplore("Search Tv Shows", "Search all Tv Shows", TvShowsActivity.class));
         arrayList.add(new ModelExplore("Speech to Text", "Convert Speech to Text", SpeechTextActivity.class));
         arrayList.add(new ModelExplore("Text to Speech", "Convert Text to Speech", TextSpeechActivity.class));
