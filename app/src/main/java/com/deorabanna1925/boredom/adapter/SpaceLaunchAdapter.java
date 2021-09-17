@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public class SpaceLaunchAdapter extends RecyclerView.Adapter<SpaceLaunchAdapter.ViewHolder> {
 
-    private final String DATE_FORMAT = "yyyy-MM-dd";
+    private final String DATE_FORMAT = "dd MMM yyyy, hh:mm a";
     private Context context;
     private ArrayList<ModelSpaceLaunch> arrayList;
 
@@ -71,17 +71,9 @@ public class SpaceLaunchAdapter extends RecyclerView.Adapter<SpaceLaunchAdapter.
 
         holder.name.setText(model.getName());
         holder.staus.setText(model.getStatus().getName());
-//        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
-//        SimpleDateFormat output = new SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.ENGLISH);
-//        try {
-//            // parse input
-//            Date newDate = input.parse(model.getNet());
-//            holder.countdown.setText(output.format(newDate));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
         ZonedDateTime dateTime = ZonedDateTime.parse(model.getNet());
-        String res = dateTime.withZoneSameInstant(ZoneId.of("IST")).format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        ZonedDateTime zonedDateTime = dateTime.withZoneSameInstant(ZoneId.of("IST"));
+        String res = zonedDateTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         holder.dateAndTime.setText(res);
         countDownStart(holder,model.getNet());
         if (model.getMission() != null) {
