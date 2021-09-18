@@ -3,6 +3,7 @@ package com.deorabanna1925.boredom.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -24,7 +25,9 @@ public class AdviceSlipActivity extends AppCompatActivity {
         binding = ActivityAdviceSlipBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
 
         binding.generateNew.setOnClickListener(view -> getAdviceData());
 
