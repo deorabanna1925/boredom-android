@@ -1,10 +1,7 @@
 package com.deorabanna1925.boredom.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,15 +18,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.deorabanna1925.boredom.databinding.ItemSpaceLaunchesBinding;
 import com.deorabanna1925.boredom.model.ModelSpaceLaunch;
 
-import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
 
 public class SpaceLaunchAdapter extends RecyclerView.Adapter<SpaceLaunchAdapter.ViewHolder> {
 
@@ -75,47 +67,11 @@ public class SpaceLaunchAdapter extends RecyclerView.Adapter<SpaceLaunchAdapter.
         ZonedDateTime zonedDateTime = dateTime.withZoneSameInstant(ZoneId.of("IST"));
         String res = zonedDateTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         holder.dateAndTime.setText(res);
-        countDownStart(holder,model.getNet());
         if (model.getMission() != null) {
             holder.missionName.setText(model.getMission().getName());
             holder.missionDescription.setText(model.getMission().getDescription());
         }
 
-    }
-
-    private void countDownStart(ViewHolder holder, String releaseDate) {
-        Handler handler = new Handler(Looper.getMainLooper());
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    handler.postDelayed(this, 1000);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
-                    Calendar c = Calendar.getInstance();
-                    c.setTime(Objects.requireNonNull(dateFormat.parse(releaseDate)));
-                    Date date = c.getTime();
-                    String newDate = dateFormat.format(date.getTime());
-                    Date event_date = dateFormat.parse(newDate);
-                    Date current_date = new Date();
-                    if (!current_date.after(event_date)) {
-                        assert event_date != null;
-                        long diff = event_date.getTime() - current_date.getTime();
-                        long Days = diff / (24 * 60 * 60 * 1000);
-                        long Hours = diff / (60 * 60 * 1000) % 24;
-                        long Minutes = diff / (60 * 1000) % 60;
-                        long Seconds = diff / 1000 % 60;
-
-                        @SuppressLint("DefaultLocale")
-                        String countdown = String.format("%02dd, %02dh, %02dm, %02ds", Days, Hours, Minutes, Seconds);
-                        countdown = "T- " + countdown;
-                        holder.countdown.setText(countdown);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        handler.postDelayed(runnable, 0);
     }
 
     @Override
@@ -128,7 +84,6 @@ public class SpaceLaunchAdapter extends RecyclerView.Adapter<SpaceLaunchAdapter.
         public ImageView image;
         public TextView name;
         public TextView staus;
-        public TextView countdown;
         public TextView dateAndTime;
         public TextView missionName;
         public TextView missionDescription;
@@ -138,7 +93,6 @@ public class SpaceLaunchAdapter extends RecyclerView.Adapter<SpaceLaunchAdapter.
             image = binding.image;
             name = binding.name;
             staus = binding.staus;
-            countdown = binding.countdown;
             dateAndTime = binding.dateAndTime;
             missionName = binding.missionName;
             missionDescription = binding.missionDescription;
