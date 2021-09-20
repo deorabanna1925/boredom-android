@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.deorabanna1925.boredom.BuildConfig;
 import com.deorabanna1925.boredom.databinding.FragmentSettingsBinding;
 import com.deorabanna1925.boredom.shared.Prefs;
 
@@ -46,6 +47,10 @@ public class SettingsFragment extends Fragment {
         //Support
         binding.faq.setOnClickListener(v -> Toast.makeText(requireContext(), "" + ((TextView) v).getText().toString(), Toast.LENGTH_SHORT).show());
         binding.privacyPolicy.setOnClickListener(v -> Toast.makeText(requireContext(), "" + ((TextView) v).getText().toString(), Toast.LENGTH_SHORT).show());
+
+        //Build Version
+        String buildVersion = "Build Version - " + BuildConfig.VERSION_NAME;
+        binding.buildVersion.setText(buildVersion);
 
         return binding.getRoot();
     }
