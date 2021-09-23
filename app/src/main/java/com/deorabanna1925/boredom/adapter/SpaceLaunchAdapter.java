@@ -67,6 +67,7 @@ public class SpaceLaunchAdapter extends RecyclerView.Adapter<SpaceLaunchAdapter.
         ZonedDateTime zonedDateTime = dateTime.withZoneSameInstant(ZoneId.of("IST"));
         String res = zonedDateTime.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         holder.dateAndTime.setText(res);
+
         if (model.getMission() != null) {
             holder.missionName.setText(model.getMission().getName());
             holder.missionDescription.setText(model.getMission().getDescription());
