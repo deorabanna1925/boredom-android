@@ -3,6 +3,7 @@ package com.deorabanna1925.boredom.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -32,6 +33,10 @@ public class SpaceLaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySpaceLaunchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle("Upcoming Space Launches");
 
         getUpcomingLaunchData();
 
