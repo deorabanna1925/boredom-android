@@ -75,21 +75,40 @@ public class ColorsActivity extends AppCompatActivity {
                     Toast.makeText(this, "Copy to Clipboard", Toast.LENGTH_SHORT).show();
                 });
 
-                binding.rValue.setText(String.valueOf(r));
-                binding.gValue.setText(String.valueOf(g));
-                binding.bValue.setText(String.valueOf(b));
-
-                binding.hValue.setText(String.valueOf(h));
-                binding.sValue.setText(String.valueOf(s));
-                binding.vValue.setText(String.valueOf(v));
+                String rgbValue = "RGB(" + r + ", " + g + ", " + b + ")";
+                binding.rgbValue.setText(rgbValue);
+                String hsvValue = "HSV(" + h + ", " + s + ", " + v + ")";
+                binding.hsvValue.setText(hsvValue);
 
                 getImageData(hex);
+
+                findTextColorOnBackground(hex);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }, error -> binding.progressBar.setVisibility(View.GONE));
         queue.add(request);
+    }
+
+    private void findTextColorOnBackground(String hex) {
+        int color = Color.parseColor("#" + hex);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        int luminance = (int) Math.sqrt(
+                red * red * .241 +
+                        green * green * .691 +
+                        blue * blue * .068);
+        if (luminance > 130) {
+            binding.hexValue.setTextColor(Color.BLACK);
+            binding.rgbValue.setTextColor(Color.BLACK);
+            binding.hsvValue.setTextColor(Color.BLACK);
+        } else {
+            binding.hexValue.setTextColor(Color.WHITE);
+            binding.rgbValue.setTextColor(Color.WHITE);
+            binding.hsvValue.setTextColor(Color.WHITE);
+        }
     }
 
     private void getImageData(String hex) {
@@ -107,9 +126,7 @@ public class ColorsActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, error -> {
-            binding.progressBar.setVisibility(View.GONE);
-        });
+        }, error -> binding.progressBar.setVisibility(View.GONE));
         queue.add(request);
     }
 }
