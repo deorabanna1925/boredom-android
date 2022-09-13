@@ -41,7 +41,7 @@ public class ColorsActivity extends AppCompatActivity {
 
         String color = getRandomHexColor();
         binding.backgroundColor.setBackgroundColor(Color.parseColor(color));
-        binding.hex.setText(color);
+        binding.hex.setText(color.toUpperCase(Locale.ENGLISH));
         binding.hex.setTextColor(Color.parseColor(findTextColorOnBackground(color)));
         int[] rgbCode = convertHexToRgb(color);
         String rgb = "rgb(" + rgbCode[0] + ", " + rgbCode[1] + ", " + rgbCode[2] + ")";
