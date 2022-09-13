@@ -93,9 +93,6 @@
             android:theme="@style/TranslucentBar" />
         <activity
             android:name=".DashboardActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".SplashActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize">
             <intent-filter>
