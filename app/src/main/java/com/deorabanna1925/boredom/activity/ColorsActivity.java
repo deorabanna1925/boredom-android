@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +38,22 @@ public class ColorsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.hide();
 
-        String color = getRandomHexColor();
+        String color = getIntent().getStringExtra("new_color");
+        if(color != null) {
+            loadColor(color);
+        }else {
+            String newColor = getRandomHexColor();
+            loadColor(newColor);
+        }
+
+        binding.changeColor.setOnClickListener(v -> {
+            String newColor = getRandomHexColor();
+            loadColor(newColor);
+        });
+
+    }
+
+    private void loadColor(String color){
         binding.backgroundColor.setBackgroundColor(Color.parseColor(color));
         binding.hex.setText(color.toUpperCase(Locale.ENGLISH));
         binding.hex.setTextColor(Color.parseColor(findTextColorOnBackground(color)));
@@ -51,6 +65,9 @@ public class ColorsActivity extends AppCompatActivity {
         String hsv = "hsv(" + hsvCode[0] + ", " + hsvCode[1] + ", " + hsvCode[2] + ")";
         binding.hsv.setText(hsv);
         binding.hsv.setTextColor(Color.parseColor(findTextColorOnBackground(color)));
+
+        binding.changeColor.setTextColor(Color.parseColor(color));
+        binding.changeColor.setBackgroundColor(Color.parseColor(findTextColorOnBackground(color)));
 
         binding.allShadesTitle.setTextColor(Color.parseColor(color));
         binding.allShadesCard.setCardBackgroundColor(Color.parseColor(findTextColorOnBackground(color)));
@@ -82,6 +99,7 @@ public class ColorsActivity extends AppCompatActivity {
             view.addView(textView);
             view.setLayoutParams(params);
             view.setBackgroundColor(Color.parseColor(hexColor));
+            view.setOnClickListener(v -> loadColor(hexColor));
             binding.allShades.addView(view);
         }
     }

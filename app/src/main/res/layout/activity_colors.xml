@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
     android:background="?attr/backgroundColor"
+    android:scrollbars="none"
     tools:context=".activity.ColorsActivity"
     tools:ignore="ScrollViewCount">
 
     <LinearLayout
         android:id="@+id/background_color"
-        android:orientation="vertical"
-        android:paddingTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="60dp">
 
         <TextView
             android:id="@+id/hex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:textSize="48sp"
@@ -31,8 +31,8 @@
             android:id="@+id/rgb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:textSize="24sp"
@@ -42,63 +42,70 @@
             android:id="@+id/hsv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
-            android:layout_margin="8dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
             <ImageView
-                android:layout_gravity="center"
                 android:id="@+id/color_image"
                 android:layout_width="300dp"
-                android:layout_height="300dp"/>
+                android:layout_height="300dp"
+                android:layout_gravity="center" />
 
         </androidx.cardview.widget.CardView>
 
+        <Button
+            android:id="@+id/change_color"
+            android:layout_width="300dp"
+            android:text="Change Color"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp" />
+
         <androidx.cardview.widget.CardView
-            app:cardCornerRadius="8dp"
-            android:layout_margin="32dp"
             android:id="@+id/all_shades_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            app:cardCornerRadius="8dp">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/all_shades_title"
-                    android:text="All Shades"
-                    android:gravity="center"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="All Shades"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/all_shades"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
 
 
     </LinearLayout>
