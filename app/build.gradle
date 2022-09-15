@@ -72,4 +72,7 @@ dependencies {
     //Open Map
     implementation 'org.osmdroid:osmdroid-android:6.1.10'
 
+    //For Color Palette
+    implementation 'androidx.palette:palette:1.0.0'
+
 }

@@ -1,12 +1,16 @@
 package com.deorabanna1925.boredom.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
@@ -17,6 +21,8 @@ import com.deorabanna1925.boredom.databinding.ItemTvShowCastBinding;
 import com.deorabanna1925.boredom.model.ModelTvShow;
 import com.stfalcon.imageviewer.StfalconImageViewer;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.ViewHolder> {
@@ -88,8 +94,12 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
         }
         holder.characterImage.setAdjustViewBounds(true);
 
-        holder.personImage.setOnClickListener(v -> fullScreenView(imagesPerson,position, holder.personImage));
-        holder.characterImage.setOnClickListener(v -> fullScreenView(imagesCharacter,position, holder.characterImage));
+        holder.personImage.setOnClickListener(v -> {
+            fullScreenView(imagesPerson, position, holder.personImage);
+        });
+        holder.characterImage.setOnClickListener(v -> {
+            fullScreenView(imagesCharacter, position, holder.characterImage);
+        });
 
         if (model.getPerson().getName() != null) {
             holder.personName.setText(model.getPerson().getName());
