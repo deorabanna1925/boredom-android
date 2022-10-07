@@ -95,9 +95,13 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
         holder.characterImage.setAdjustViewBounds(true);
 
         holder.personImage.setOnClickListener(v -> {
+            imagesPerson.clear();
+            imagesPerson.add(model.getPerson().getImage().getOriginal());
             fullScreenView(imagesPerson, position, holder.personImage);
         });
         holder.characterImage.setOnClickListener(v -> {
+            imagesCharacter.clear();
+            imagesCharacter.add(model.getCharacter().getImage().getOriginal());
             fullScreenView(imagesCharacter, position, holder.characterImage);
         });
 
