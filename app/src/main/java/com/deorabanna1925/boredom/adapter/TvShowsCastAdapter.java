@@ -95,14 +95,39 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
         holder.characterImage.setAdjustViewBounds(true);
 
         holder.personImage.setOnClickListener(v -> {
-            imagesPerson.clear();
-            imagesPerson.add(model.getPerson().getImage().getOriginal());
-            fullScreenView(imagesPerson, position, holder.personImage);
+            ArrayList<String> image = new ArrayList<>();
+            image.add(model.getPerson().getImage().getOriginal());
+            new StfalconImageViewer.Builder<>(context, image, (imageView, image1) -> {
+                CircularProgressDrawable progressDrawable1 = new CircularProgressDrawable(context);
+                progressDrawable1.setStrokeWidth(5f);
+                progressDrawable1.setCenterRadius(30f);
+                progressDrawable1.start();
+                Glide.with(context)
+                        .load(image1)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .placeholder(progressDrawable1)
+                        .skipMemoryCache(true)
+                        .into(imageView);
+            }).withHiddenStatusBar(false).show();
         });
+
         holder.characterImage.setOnClickListener(v -> {
-            imagesCharacter.clear();
-            imagesCharacter.add(model.getCharacter().getImage().getOriginal());
-            fullScreenView(imagesCharacter, position, holder.characterImage);
+            ArrayList<String> image = new ArrayList<>();
+            image.add(model.getCharacter().getImage().getOriginal());
+            new StfalconImageViewer.Builder<>(context, image, (imageView, image1) -> {
+                CircularProgressDrawable progressDrawable1 = new CircularProgressDrawable(context);
+                progressDrawable1.setStrokeWidth(5f);
+                progressDrawable1.setCenterRadius(30f);
+                progressDrawable1.start();
+                Glide.with(context)
+                        .load(image1)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .placeholder(progressDrawable1)
+                        .skipMemoryCache(true)
+                        .into(imageView);
+            }).withHiddenStatusBar(false).show();
         });
 
         if (model.getPerson().getName() != null) {
