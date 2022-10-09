@@ -140,14 +140,6 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
 
     }
 
-    private void fullScreenView(ArrayList<String> images, int position, ImageView view) {
-        new StfalconImageViewer.Builder<>(context, images, (imageView, image) ->
-                Glide.with(context).load(image).into(imageView)).withStartPosition(position)
-                .withHiddenStatusBar(false)
-                .withTransitionFrom(view)
-                .show();
-    }
-
     @Override
     public int getItemCount() {
         return arrayList.size();
