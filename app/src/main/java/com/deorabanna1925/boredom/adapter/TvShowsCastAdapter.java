@@ -95,39 +95,11 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
         holder.characterImage.setAdjustViewBounds(true);
 
         holder.personImage.setOnClickListener(v -> {
-            ArrayList<String> image = new ArrayList<>();
-            image.add(model.getPerson().getImage().getOriginal());
-            new StfalconImageViewer.Builder<>(context, image, (imageView, image1) -> {
-                CircularProgressDrawable progressDrawable1 = new CircularProgressDrawable(context);
-                progressDrawable1.setStrokeWidth(5f);
-                progressDrawable1.setCenterRadius(30f);
-                progressDrawable1.start();
-                Glide.with(context)
-                        .load(image1)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .placeholder(progressDrawable1)
-                        .skipMemoryCache(true)
-                        .into(imageView);
-            }).withHiddenStatusBar(false).show();
+            imageFullScreen(model.getPerson().getImage().getOriginal());
         });
 
         holder.characterImage.setOnClickListener(v -> {
-            ArrayList<String> image = new ArrayList<>();
-            image.add(model.getCharacter().getImage().getOriginal());
-            new StfalconImageViewer.Builder<>(context, image, (imageView, image1) -> {
-                CircularProgressDrawable progressDrawable1 = new CircularProgressDrawable(context);
-                progressDrawable1.setStrokeWidth(5f);
-                progressDrawable1.setCenterRadius(30f);
-                progressDrawable1.start();
-                Glide.with(context)
-                        .load(image1)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .placeholder(progressDrawable1)
-                        .skipMemoryCache(true)
-                        .into(imageView);
-            }).withHiddenStatusBar(false).show();
+            imageFullScreen(model.getCharacter().getImage().getOriginal());
         });
 
         if (model.getPerson().getName() != null) {
@@ -138,6 +110,24 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
             holder.characterName.setText(model.getCharacter().getName());
         }
 
+    }
+
+    private void imageFullScreen(String original) {
+        ArrayList<String> image = new ArrayList<>();
+        image.add(original);
+        new StfalconImageViewer.Builder<>(context, image, (imageView, image1) -> {
+            CircularProgressDrawable progressDrawable1 = new CircularProgressDrawable(context);
+            progressDrawable1.setStrokeWidth(5f);
+            progressDrawable1.setCenterRadius(30f);
+            progressDrawable1.start();
+            Glide.with(context)
+                    .load(image1)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .placeholder(progressDrawable1)
+                    .skipMemoryCache(true)
+                    .into(imageView);
+        }).withHiddenStatusBar(false).show();
     }
 
     @Override
