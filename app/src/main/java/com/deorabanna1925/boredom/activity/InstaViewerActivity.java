@@ -73,9 +73,8 @@ public class InstaViewerActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }, error -> {
-            Toast.makeText(this, ""+ error.getMessage(), Toast.LENGTH_SHORT).show();
-            });
-        }
-
+            Toast.makeText(this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
+
 }
