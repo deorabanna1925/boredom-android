@@ -1,7 +1,5 @@
 package com.deorabanna1925.boredom.activity;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -25,8 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
-
 public class RandomUserActivity extends AppCompatActivity {
 
     private ActivityRandomUserBinding binding;
@@ -38,8 +34,9 @@ public class RandomUserActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         getData();
 
@@ -95,7 +92,6 @@ public class RandomUserActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(randomUser.getPicture().getLarge())
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(bitmapTransform(new BlurTransformation(25, 3)))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(binding.imageBackground);

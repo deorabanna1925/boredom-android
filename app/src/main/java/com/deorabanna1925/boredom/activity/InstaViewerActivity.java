@@ -63,11 +63,6 @@ public class InstaViewerActivity extends AppCompatActivity {
                 String channelUrl = user.getString("channel_url");
                 String connectedFbPage = user.getString("connected_fb_page");
                 String edgeFelixVideoTimelineCount = user.getString("edge_felix_video_timeline_count");
-                String edgeFelixVideoTimelinePageInfoHasNextPage = user.getJSONObject("edge_felix_video_timeline").getJSONObject("page_info").getString("has_next_page");
-                String edgeFelixVideoTimelinePageInfoEndCursor = user.getJSONObject("edge_felix_video_timeline").getJSONObject("page_info").getString("end_cursor");
-                String edgeFelixVideoTimelineEdgesNodeVideoUrl = user.getJSONObject("edge_felix_video_timeline").getJSONArray("edges").getJSONObject(0).getJSONObject("node").getString("video_url");
-                String edgeFelixVideoTimelineEdgesNodeVideoViewCount = user.getJSONObject("edge_felix_video_timeline").getJSONArray("edges").getJSONObject(0).getJSONObject("node").getString("video_view_count");
-                String edgeFelixVideoTimelineEdgesNodeThumbnailSrc = user.getJSONObject("edge_felix_video_timeline").getJSONArray("edges").getJSONObject(0).getJSONObject("node").getString("thumbnail_src");
 
             } catch (JSONException e) {
                 e.printStackTrace();

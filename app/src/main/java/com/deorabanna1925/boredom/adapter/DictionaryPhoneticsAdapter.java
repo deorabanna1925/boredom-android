@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 public class DictionaryPhoneticsAdapter extends RecyclerView.Adapter<DictionaryPhoneticsAdapter.ViewHolder> {
 
-    private Context context;
-    private ArrayList<ModelDictionary.Phonetics> arrayList;
+    private final Context context;
+    private final ArrayList<ModelDictionary.Phonetics> arrayList;
 
     public DictionaryPhoneticsAdapter(Context context, ArrayList<ModelDictionary.Phonetics> arrayList) {
         this.context = context;
@@ -44,7 +44,7 @@ public class DictionaryPhoneticsAdapter extends RecyclerView.Adapter<DictionaryP
 
         holder.audio.setOnClickListener(view -> {
             if(model.getAudio()!=null){
-                String audioUrl = "http:" + model.getAudio();
+                String audioUrl =  model.getAudio();
                 playAudio(audioUrl,1.0f);
             }else {
                 Toast.makeText(context, "No Audio", Toast.LENGTH_SHORT).show();
@@ -53,7 +53,7 @@ public class DictionaryPhoneticsAdapter extends RecyclerView.Adapter<DictionaryP
 
         holder.audio.setOnLongClickListener(view -> {
             if(model.getAudio()!=null){
-                String audioUrl = "http:" + model.getAudio();
+                String audioUrl = model.getAudio();
                 playAudio(audioUrl,0.5f);
             }else {
                 Toast.makeText(context, "No Audio", Toast.LENGTH_SHORT).show();

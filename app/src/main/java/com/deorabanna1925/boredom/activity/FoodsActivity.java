@@ -1,7 +1,5 @@
 package com.deorabanna1925.boredom.activity;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,8 +18,6 @@ import com.deorabanna1925.boredom.databinding.ActivityFoodsBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
-
 public class FoodsActivity extends AppCompatActivity {
 
     private ActivityFoodsBinding binding;
@@ -34,8 +30,9 @@ public class FoodsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         progressDrawable = new CircularProgressDrawable(this);
         progressDrawable.setStrokeWidth(5f);
@@ -68,7 +65,6 @@ public class FoodsActivity extends AppCompatActivity {
                 Glide.with(this)
                         .load(image)
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(bitmapTransform(new BlurTransformation(25, 3)))
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(binding.backgroundImage);

@@ -36,8 +36,9 @@ public class GitHubTrendingActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle("GitHub Trending");
+        if (actionBar != null) {
+            actionBar.setTitle("GitHub Trending");
+        }
 
         setPeriodSpinner();
         getLanguages();

@@ -1,9 +1,7 @@
 package com.deorabanna1925.boredom.adapter;
 
-import android.app.SearchManager;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -32,7 +30,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
 
@@ -51,24 +50,29 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         return new ViewHolder(binding);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
         ModelCountry model = arrayList.get(position);
 
-        holder.nativeName.setText(model.getNativeName());
-        holder.name.setText(model.getName());
-        holder.capital.setText(model.getCapital());
-        holder.alpha2Code.setText(model.getAlpha2Code());
-        holder.alpha3Code.setText(model.getAlpha3Code());
-        holder.topLevelDomain.setText(model.getTopLevelDomain().get(0));
+        Set<String> nativeMap = model.getName().getNativeName().keySet();
+        StringBuilder nativeName = new StringBuilder();
+        for (String key : nativeMap) {
+            nativeName.append(Objects.requireNonNull(model.getName().getNativeName().get(key)).getCommon());
+            nativeName.append(", ");
+        }
 
-        String flag = "https://flagcdn.com/w640/" + model.getAlpha2Code().toLowerCase() + ".webp";
+        holder.nativeName.setText(nativeName.toString());
+        holder.name.setText(model.getFlag() + " " + model.getName().getCommon());
+        holder.capital.setText(model.getCapital().get(0));
+        holder.alpha2Code.setText(model.getCca2());
+        holder.alpha3Code.setText(model.getCca3());
 
-        Glide.with(context).load(flag).into(holder.flag);
+        Glide.with(context).load(model.getFlags().getPng()).into(holder.flag);
 
-        String area = model.getArea() + " km" + "\u00B2";
+        String area = model.getArea().toString() + " km" + "\u00B2";
         holder.area.setText(area);
-        holder.population.setText(model.getPopulation());
+        holder.population.setText(String.valueOf(model.getPopulation()));
 
         String time = "";
         for (String timezone : model.getTimezones()) {
@@ -85,57 +89,51 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             utc += "\n";
         }
 
-        String language = "";
-        for(ModelCountry.Languages languages : model.getLanguages()) {
-            language += languages.getName();
-            holder.language.setText(language);
-            language += "\n";
+        Set<String> langMap = model.getLanguages().keySet();
+        StringBuilder languages = new StringBuilder();
+        for (String key : langMap) {
+            languages.append(model.getLanguages().get(key));
+            languages.append(", ");
         }
 
-        String nativeLanguage = "";
-        for(ModelCountry.Languages languages : model.getLanguages()) {
-            nativeLanguage += languages.getNativeName();
-            holder.nativeLanguage.setText(nativeLanguage);
-            nativeLanguage += "\n";
-        }
+//        String symbol = "";
+//        for(ModelCountry.Currencies currency : model.getCurrencies()) {
+//            symbol += currency.getSymbol();
+//            holder.currencySymbol.setText(symbol);
+//            symbol += "\n";
+//        }
 
-        String symbol = "";
-        for(ModelCountry.Currencies currency : model.getCurrencies()) {
-            symbol += currency.getSymbol();
-            holder.currencySymbol.setText(symbol);
-            symbol += "\n";
-        }
-        String name = "";
-        for(ModelCountry.Currencies currency : model.getCurrencies()) {
-            name += currency.getName();
-            holder.currencyName.setText(name);
-            name += "\n";
-        }
-        String code = "";
-        for(ModelCountry.Currencies currency : model.getCurrencies()) {
-            code += currency.getCode();
-            holder.currencyCode.setText(code);
-            code += "\n";
-        }
-
+//        String name = "";
+//        for(ModelCountry.Currencies currency : model.getCurrencies()) {
+//            name += currency.getName();
+//            holder.currencyName.setText(name);
+//            name += "\n";
+//        }
+//        String code = "";
+//        for(ModelCountry.Currencies currency : model.getCurrencies()) {
+//            code += currency.getCode();
+//            holder.currencyCode.setText(code);
+//            code += "\n";
+//        }
+//
         holder.subRegion.setText(model.getSubregion());
         holder.region.setText(model.getRegion());
-
-        holder.searchGoogle.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-            intent.putExtra(SearchManager.QUERY, model.getName()); // query contains search string
-            context.startActivity(intent);
-        });
-
-        holder.viewOnMap.setOnClickListener(view -> {
-            String uri = String.format(Locale.ENGLISH,
-                    "http://maps.google.com/maps?q=loc:%f,%f",
-                    model.getLatlng().get(0),
-                    model.getLatlng().get(1)
-            );
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            context.startActivity(intent);
-        });
+//
+//        holder.searchGoogle.setOnClickListener(view -> {
+//            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+//            intent.putExtra(SearchManager.QUERY, model.getName()); // query contains search string
+//            context.startActivity(intent);
+//        });
+//
+//        holder.viewOnMap.setOnClickListener(view -> {
+//            String uri = String.format(Locale.ENGLISH,
+//                    "http://maps.google.com/maps?q=loc:%f,%f",
+//                    model.getLatlng().get(0),
+//                    model.getLatlng().get(1)
+//            );
+//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//            context.startActivity(intent);
+//        });
 
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
         holder.recyclerView.setNestedScrollingEnabled(false);
@@ -146,7 +144,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     }
 
     private void getColleges(ViewHolder holder, ModelCountry model) {
-        String url = "http://universities.hipolabs.com/search?country=" + model.getName();
+        String url = "http://universities.hipolabs.com/search?country=" + model.getName().getCommon();
         final RequestQueue queue = Volley.newRequestQueue(context);
         queue.getCache().clear();
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
@@ -158,7 +156,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
                 }.getType();
                 ArrayList<ModelCollege> arrayList = gson.fromJson(jsonOutput, listType);
                 if(arrayList.size()!=0){
-                    String collegesInCountry = "Colleges in " + model.getName();
+                    String collegesInCountry = "Colleges in " + model.getName().getCommon();
                     holder.collegesInCountry.setText(collegesInCountry);
                 }
                 holder.recyclerView.setAdapter(new CollegeAdapter(context, arrayList));
@@ -199,7 +197,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public ImageView flag;
         public TextView alpha2Code;
         public TextView alpha3Code;
-        public TextView topLevelDomain;
         public TextView timezones;
         public TextView utc;
         public TextView area;
@@ -225,7 +222,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             flag = binding.flag;
             alpha2Code = binding.alpha2Code;
             alpha3Code = binding.alpha3Code;
-            topLevelDomain = binding.topLevelDomain;
             timezones = binding.timezones;
             utc = binding.utc;
             area = binding.area;

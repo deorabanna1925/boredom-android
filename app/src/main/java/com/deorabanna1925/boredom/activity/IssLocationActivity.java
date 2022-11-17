@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,7 +35,9 @@ public class IssLocationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Current ISS Location");
+        if (actionBar != null) {
+            actionBar.setTitle("Current ISS Location");
+        }
 
         getIssCoordinates();
 

@@ -26,8 +26,9 @@ public class AdviceSlipActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         binding.generateNew.setOnClickListener(view -> getAdviceData());
 

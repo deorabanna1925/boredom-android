@@ -33,8 +33,9 @@ public class SpeechTextActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle("Speech to Text");
+        if (actionBar != null) {
+            actionBar.setTitle("Speech to Text");
+        }
 
         binding.mic.setOnClickListener(view -> {
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){

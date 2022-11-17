@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -30,6 +31,7 @@ import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MapViewActivity extends AppCompatActivity {
 
@@ -56,9 +58,12 @@ public class MapViewActivity extends AppCompatActivity {
         //inflate and create the map
         setContentView(R.layout.activity_map_view);
 
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
-        map = (MapView) findViewById(R.id.map);
+        map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
 
         double aLat = Double.parseDouble(getIntent().getStringExtra("latitude"));
@@ -143,9 +148,7 @@ public class MapViewActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         ArrayList<String> permissionsToRequest = new ArrayList<>();
-        for (int i = 0; i < grantResults.length; i++) {
-            permissionsToRequest.add(permissions[i]);
-        }
+        permissionsToRequest.addAll(Arrays.asList(permissions).subList(0, grantResults.length));
         if (permissionsToRequest.size() > 0) {
             ActivityCompat.requestPermissions(
                     this,

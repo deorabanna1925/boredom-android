@@ -39,8 +39,9 @@ public class DictionaryActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         binding.progressBar.setVisibility(View.GONE);
 
@@ -91,7 +92,7 @@ public class DictionaryActivity extends AppCompatActivity {
                     String message = jsonObject.getString("message");
                     String resolution = jsonObject.getString("resolution");
 
-                    Toast.makeText(this, "" + title, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(this, "" + resolution, Toast.LENGTH_SHORT).show();
 

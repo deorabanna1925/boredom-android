@@ -3,6 +3,7 @@ package com.deorabanna1925.boredom.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -24,7 +25,10 @@ public class KanyeWestActivity extends AppCompatActivity {
         binding = ActivityKanyeWestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         binding.generateNew.setOnClickListener(view -> getAdviceData());
 

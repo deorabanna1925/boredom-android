@@ -36,8 +36,9 @@ public class GradientActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setNestedScrollingEnabled(false);

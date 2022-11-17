@@ -3,7 +3,6 @@ package com.deorabanna1925.boredom.model;
 import java.util.ArrayList;
 
 public class ModelCollege {
-
     private String country;
     private ArrayList<String> web_pages;
     private String alpha_two_code;

@@ -29,6 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
         getDefaultTheme(prefs.getTheme());
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
 
         setupActionBar();
         setupDefaultHomeScreen();
@@ -54,27 +55,30 @@ public class DashboardActivity extends AppCompatActivity {
     private void setupDefaultHomeScreen() {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         binding.bottomNavigation.setSelectedItemId(R.id.bottom_nav_home);
-        actionBar.setTitle(getHomeTitle());
+        if (actionBar != null) {
+            actionBar.setTitle(getHomeTitle());
+        }
     }
 
     private String getHomeTitle() {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
-        if(timeOfDay < 12){
+        if (timeOfDay < 12) {
             return "Good Morning";
-        }else if(timeOfDay < 16){
+        } else if (timeOfDay < 16) {
             return "Good Afternoon";
-        }else if(timeOfDay < 21){
+        } else if (timeOfDay < 21) {
             return "Good Evening";
-        }else {
+        } else {
             return "Good Night";
         }
     }
 
     private void setupActionBar() {
         actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle(getHomeTitle());
+        if (actionBar != null) {
+            actionBar.setTitle(getHomeTitle());
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -84,15 +88,21 @@ public class DashboardActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.bottom_nav_home:
                     selectedFragment = new HomeFragment();
-                    actionBar.setTitle(getHomeTitle());
+                    if (actionBar != null) {
+                        actionBar.setTitle(getHomeTitle());
+                    }
                     break;
                 case R.id.bottom_nav_explore:
                     selectedFragment = new ExploreFragment();
-                    actionBar.setTitle("Explore");
+                    if (actionBar != null) {
+                        actionBar.setTitle("Explore");
+                    }
                     break;
                 case R.id.bottom_nav_settings:
                     selectedFragment = new SettingsFragment();
-                    actionBar.setTitle("Settings");
+                    if (actionBar != null) {
+                        actionBar.setTitle("Settings");
+                    }
                     break;
             }
 

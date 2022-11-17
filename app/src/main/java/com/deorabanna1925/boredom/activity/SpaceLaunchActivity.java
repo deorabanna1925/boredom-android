@@ -35,8 +35,9 @@ public class SpaceLaunchActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle("Upcoming Space Launches");
+        if (actionBar != null) {
+            actionBar.setTitle("Upcoming Space Launches");
+        }
 
         getUpcomingLaunchData();
 

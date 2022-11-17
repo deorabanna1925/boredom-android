@@ -1,7 +1,5 @@
 package com.deorabanna1925.boredom.activity;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
@@ -31,15 +30,14 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
 
     private ActivityWhenIsTheNextMcuFilmBinding binding;
     private CircularProgressDrawable progressDrawable;
 
-    private String DATE_FORMAT = "yyyy-MM-dd";
-    private Handler handler = new Handler(Looper.getMainLooper());
+    private final String DATE_FORMAT = "yyyy-MM-dd";
+    private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable runnable;
 
     @Override
@@ -48,7 +46,10 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
         binding = ActivityWhenIsTheNextMcuFilmBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportActionBar().setTitle("When is the next MCU film ?");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("When is the next MCU film ?");
+        }
 
         progressDrawable = new CircularProgressDrawable(this);
         progressDrawable.setStrokeWidth(5f);
@@ -144,7 +145,6 @@ public class WhenIsTheNextMcuFilmActivity extends AppCompatActivity {
                 Glide.with(this)
                         .load(poster_url)
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(bitmapTransform(new BlurTransformation(25, 3)))
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(binding.backgroundImage);

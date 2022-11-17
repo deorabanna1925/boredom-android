@@ -1,7 +1,5 @@
 package com.deorabanna1925.boredom.activity;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -36,11 +34,11 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
-
 public class TvShowDetailsActivity extends AppCompatActivity {
 
     private ActivityTvShowDetailsBinding binding;
+    private String imdbId;
+    private String showId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +47,16 @@ public class TvShowDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
-        int id = getIntent().getIntExtra("id", 1);
+        showId = String.valueOf(getIntent().getIntExtra("id", 1));
 
-        getTvShowData(String.valueOf(id));
-        getTvShowCastData(String.valueOf(id));
-        getTvShowSeasonData(String.valueOf(id));
-        getTvShowAllEpisodeData(String.valueOf(id));
+        getTvShowData(showId);
+        getTvShowCastData(showId);
+        getTvShowSeasonData(showId);
+        getTvShowAllEpisodeData(showId);
 
     }
 
@@ -94,6 +93,10 @@ public class TvShowDetailsActivity extends AppCompatActivity {
                 }.getType();
                 ModelTvShow.Show model = gson.fromJson(jsonOutput, listType);
 
+                if (model.getExternals() != null && model.getExternals().getImdb() != null) {
+                    imdbId = model.getExternals().getImdb();
+                }
+
                 if (model.getImage() != null) {
 
                     Glide.with(this)
@@ -107,7 +110,6 @@ public class TvShowDetailsActivity extends AppCompatActivity {
                     Glide.with(this)
                             .load(model.getImage().getMedium())
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(bitmapTransform(new BlurTransformation(25, 3)))
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .skipMemoryCache(true)
                             .into(binding.imageBackground);
@@ -124,7 +126,6 @@ public class TvShowDetailsActivity extends AppCompatActivity {
                     Glide.with(this)
                             .load("https://static.tvmaze.com/images/no-img/no-img-portrait-text.png")
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(bitmapTransform(new BlurTransformation(25, 3)))
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .skipMemoryCache(true)
                             .into(binding.imageBackground);
@@ -143,9 +144,8 @@ public class TvShowDetailsActivity extends AppCompatActivity {
                 seasonNameViewAll("All Episodes", false);
 
                 binding.viewAll.setOnClickListener(v -> {
-                    int i = getIntent().getIntExtra("id", 1);
                     seasonNameViewAll("All Episodes", false);
-                    getTvShowAllEpisodeData(String.valueOf(i));
+                    getTvShowAllEpisodeData(showId);
                 });
 
             } catch (JSONException e) {
@@ -223,7 +223,7 @@ public class TvShowDetailsActivity extends AppCompatActivity {
                 Type listType = new TypeToken<ArrayList<ModelTvShow.Episode>>() {
                 }.getType();
                 ArrayList<ModelTvShow.Episode> arrayList = gson.fromJson(jsonOutput, listType);
-                TvShowsEpisodeAdapter adapter = new TvShowsEpisodeAdapter(TvShowDetailsActivity.this, arrayList);
+                TvShowsEpisodeAdapter adapter = new TvShowsEpisodeAdapter(TvShowDetailsActivity.this, arrayList, showId, imdbId);
                 binding.viewPager.setAdapter(adapter);
                 binding.viewPager.setOffscreenPageLimit(3);
             } catch (JSONException e) {

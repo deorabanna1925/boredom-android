@@ -23,8 +23,9 @@ public class TextSpeechActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle("Text to Speech");
+        if (actionBar != null) {
+            actionBar.setTitle("Text to Speech");
+        }
 
         textToSpeech = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {

@@ -1,16 +1,13 @@
 package com.deorabanna1925.boredom.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
@@ -19,17 +16,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.deorabanna1925.boredom.databinding.ItemTvShowCastBinding;
 import com.deorabanna1925.boredom.model.ModelTvShow;
-import com.stfalcon.imageviewer.StfalconImageViewer;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.ViewHolder> {
 
-    private Context context;
-    private ArrayList<ModelTvShow.Cast> arrayList;
-    private ArrayList<String> imagesPerson, imagesCharacter;
+    private final Context context;
+    private final ArrayList<ModelTvShow.Cast> arrayList;
+    private final ArrayList<String> imagesPerson;
+    private final ArrayList<String> imagesCharacter;
 
     public TvShowsCastAdapter(Context context, ArrayList<ModelTvShow.Cast> arrayList) {
         this.context = context;
@@ -115,19 +110,7 @@ public class TvShowsCastAdapter extends RecyclerView.Adapter<TvShowsCastAdapter.
     private void imageFullScreen(String original) {
         ArrayList<String> image = new ArrayList<>();
         image.add(original);
-        new StfalconImageViewer.Builder<>(context, image, (imageView, image1) -> {
-            CircularProgressDrawable progressDrawable1 = new CircularProgressDrawable(context);
-            progressDrawable1.setStrokeWidth(5f);
-            progressDrawable1.setCenterRadius(30f);
-            progressDrawable1.start();
-            Glide.with(context)
-                    .load(image1)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .placeholder(progressDrawable1)
-                    .skipMemoryCache(true)
-                    .into(imageView);
-        }).withHiddenStatusBar(false).show();
+        Toast.makeText(context, "To Do Later", Toast.LENGTH_SHORT).show();
     }
 
     @Override
